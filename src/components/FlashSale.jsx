@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import flash from '../assets/flash-sale.svg';
-import Item from './Item';
+import Item from './Item.jsx';
+import items from '../scripts/dataList.js';
 
 const Div = styled.div`
   font-size: 1.1rem;
@@ -77,7 +78,7 @@ const FlashSale = ({ timer }) => {
           See All {'\u203A'}
         </FlexItem>
       </Div>
-      <Item />
+      <Item items={items} flag={true} />
     </>
   );
 };

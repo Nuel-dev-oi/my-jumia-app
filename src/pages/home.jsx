@@ -12,6 +12,8 @@ import deals from '../assets/deals.png';
 import toy from '../assets/toy.png';
 import testing from '../assets/testing.png';
 import FlashSale from '../components/FlashSale.jsx';
+import Item from '../components/Item.jsx';
+import itemList from '../scripts/itemList.js';
 
 const images = [awoof, upto, more, offer, grocery, secure, deals, toy, testing];
 
@@ -134,6 +136,18 @@ const Home = () => {
           second: 59,
         }}
       />
+      <TransparentDiv />
+
+      <Item
+        items={itemList}
+        flag={false}
+        style={{
+          height: `${280 * 2}px`,
+          flexWrap: 'wrap',
+          justifyContent: 'space-around',
+        }}
+      />
+
       <TransparentDiv />
     </>
   );

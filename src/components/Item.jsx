@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import items from '../scripts/dataList.js';
 
 const FlexDiv = styled.div`
   display: flex;
@@ -18,7 +17,7 @@ const Img = styled.img`
 
 const FlexItem = styled.div`
   width: calc(100% / 6);
-  height: 100%;
+  height: 280px;
   /*border: 1px solid blue;*/
   padding: 5px;
   display: flex;
@@ -76,19 +75,39 @@ const FloatDiv = styled.div`
   color: rgba(255, 155, 4, 1);
 `;
 
-const Item = () => {
+const Item = ({ items, style, flag }) => {
   return (
-    <FlexDiv>
+    <FlexDiv
+      style={{
+        ...style,
+      }}
+    >
       {items.map((item, i) => {
         return (
-          <FlexItem key={i}>
-            <Img src={item.picture} />
+          <FlexItem
+            key={i}
+            style={{
+              width: `${flag ? 'calc(100% / 6)' : '250px'}`,
+            }}
+          >
+            {flag ? <Img src={item.picture} /> : null}
+            {!flag ? (
+              <Img
+                src={item.picture}
+                style={{
+                  height: '90%',
+                }}
+              />
+            ) : null}
             <div
               style={{
                 fontWeight: '200',
+                whiteSpace: 'nowrap',
+                fontSize: '.9rem',
+                textAlign: 'center',
               }}
             >
-              {item.item}
+              {item?.item}
             </div>
 
             <InnerDiv>
@@ -98,7 +117,8 @@ const Item = () => {
                   fontWeight: '400',
                 }}
               >
-                {'\u20A6'} {item.price}
+                {flag ? '\u20A6' : null}
+                {flag ? item?.price : null}
               </strong>
               <small
                 style={{
@@ -106,7 +126,8 @@ const Item = () => {
                   textDecoration: 'line-through',
                 }}
               >
-                {'\u20A6'} {item.formerPrice}
+                {flag ? '\u20A6' : null}
+                {flag ? item.formerPrice : null}
               </small>
             </InnerDiv>
 
@@ -116,20 +137,26 @@ const Item = () => {
                   color: '#cfcbcbff',
                 }}
               >
-                {item.value}{' '}
-                {item.value === 0 || item.value === 1 ? 'item' : 'items'} left
+                {flag ? item?.value : null}{' '}
+                {flag
+                  ? item?.value === 0 || item?.value === 1
+                    ? 'item left'
+                    : 'items left'
+                  : null}
               </small>
-              <ProgressBar max={item.max} value={item.value} />
+              {flag ? <ProgressBar max={item.max} value={item.value} /> : null}
             </InnerDiv>
-            <FloatDiv>
-              {
-                <item.discount
-                  formerPrice={item.formerPrice}
-                  price={item.price}
-                />
-              }
-              {`%`}
-            </FloatDiv>
+            {flag ? (
+              <FloatDiv>
+                {flag ? (
+                  <item.discount
+                    formerPrice={item?.formerPrice}
+                    price={item?.price}
+                  />
+                ) : null}
+                {`%`}
+              </FloatDiv>
+            ) : null}
           </FlexItem>
         );
       })}
