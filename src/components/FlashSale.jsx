@@ -1,0 +1,85 @@
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import flash from '../assets/flash-sale.svg';
+import Item from './Item';
+
+const Div = styled.div`
+  font-size: 1.1rem;
+  background-color: red;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 10px;
+`;
+
+const Img = styled.img`
+  width: 45px;
+  vertical-align: middle;
+`;
+const FlexItem = styled.div`
+  color: #fff;
+  cursor: pointer;
+`;
+
+const FlashSale = ({ timer }) => {
+  const [second, setSecond] = useState(timer?.second);
+  const [minute, setMinute] = useState(timer?.minute);
+  const [hour, setHour] = useState(timer?.hour);
+
+  useEffect(() => {
+    const timer =
+      hour === 0 && minute === 0 && second === 0
+        ? null
+        : setInterval(handleTimer, 1000);
+    //console.log(hour, minute, second);
+    function handleTimer() {
+      setSecond(second - 1);
+      if (second === 0 && minute != 0) {
+        setMinute(minute - 1);
+        setSecond(59);
+      }
+      if (minute === 0 && hour != 0) {
+        setHour(hour - 1);
+        setMinute(59);
+      }
+    }
+
+    return () => clearInterval(timer);
+  }, [hour, minute, second]);
+
+  return (
+    <>
+      <Div>
+        <FlexItem>
+          <Img src={flash} alt="Flash sale" />
+          <span>Flash Sales</span>
+        </FlexItem>
+        <FlexItem>
+          Time Left:{' '}
+          <span
+            style={{
+              fontWeight: '600',
+            }}
+            className="flash-sale"
+          >
+            {String(hour).length === 1 ? `0${hour}` : `${hour}`}h :{' '}
+            {String(minute).length === 1 ? `0${minute}` : `${minute}`}m :{' '}
+            {String(second).length === 1 ? `0${second}` : `${second}`}s
+          </span>
+        </FlexItem>
+        <FlexItem
+          style={{
+            fontSize: '.9em',
+          }}
+        >
+          See All {'\u203A'}
+        </FlexItem>
+      </Div>
+      <Item />
+    </>
+  );
+};
+
+export default FlashSale;
