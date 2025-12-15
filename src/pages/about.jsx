@@ -29,6 +29,9 @@ const About = () => {
         Click to Decrease value
       </Button>
       <p>This is the about Page: {value}</p>
+      <Link to="/">
+        Home
+      </Link>
     </>
   );
 };

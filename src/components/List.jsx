@@ -22,9 +22,26 @@ const Li = styled.li`
 `;
 
 const List = ({ item, children }) => {
+  let link = item;
+  let items = item.split("");
+  let obj = {};
+  for (let letter of items) {
+    if (letter === " ") {
+      if(!("space" in obj)) {
+        link = link.replace(/\s/, "_");
+        obj["space"] = letter;
+      } else {
+        link = link.replace(/\s/, "");
+      } 
+    }
+    if (letter === "&") {
+      link = link.replace(/&/g, "");
+    } 
+  }
+  
   return (
     <Li>
-      <Link to={`/${item}`}>
+      <Link to={`/${link.toLowerCase()}`}>
         {children} {item}
       </Link>
     </Li>

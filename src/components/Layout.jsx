@@ -1,4 +1,5 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
+import { useLocation, Outlet } from "react-router-dom";
 import Navigation from './Navigation.jsx';
 import SubAds from './SubAds.jsx';
 import Header from './Header.jsx';
@@ -9,6 +10,10 @@ import logo from '../assets/jumia-white.svg';
 import FlickAds from './FLickAds.jsx';
 import CallOrder from './CallOrder.jsx';
 import MainAds from './MainAds.jsx';
+import Appliance from "../pages/appliance.jsx";
+import Phones from "../pages/phonesTablet.jsx";
+import Health from '../pages/healthBeauty.jsx';
+
 
 const Main = styled.main`
   width: 100%;
@@ -31,10 +36,18 @@ const LayoutGrid = styled.div`
   background-size: cover;
   width: 1270px;
 `;
+const Pages = [() => <Appliance />, () => <Phones />, () => <Health />];
+const strings = ["app", "pho", "hea"];
 
 const Layout = ({ children, logoName }) => {
+  
   const [isSmall, setIsSmall] = useState(true);
   const [_, setWidth] = useState(window.innerWidth);
+  const [render, setRender] = useState();
+  const location = useLocation();
+
+  const displayLayout = location.pathname === "/" || location.pathname === "/about";
+  
 
   useLayoutEffect(() => {
     const handleResize = () => {
@@ -60,6 +73,20 @@ const Layout = ({ children, logoName }) => {
     };
   }, []); // <— run only once
 
+  useEffect(() => {
+    const handlePages = () => {
+      const index =  strings.filter((item) => {
+        const url = new URL(window.location);
+        const regExp = new RegExp(item);
+        return  regExp.test(url.pathname)  === true;
+      });
+      let i = strings.indexOf(index[0]); 
+      setRender(Pages[i])
+    }
+    handlePages();
+  }, [location.pathname])
+
+  
   return isSmall ? (
     <>
       <Header logoName={'Jumia'} />
@@ -81,7 +108,9 @@ const Layout = ({ children, logoName }) => {
           alignSelf: 'stretch',
         }}
       />
-      <Div
+      {
+        displayLayout ?
+      (<Div
         style={{
           gridRowStart: '2',
           gridRowEnd: '3',
@@ -161,7 +190,8 @@ const Layout = ({ children, logoName }) => {
         >
           <div>{children}</div>
         </Main>
-      </Div>
+      </Div>) : render
+      }
       <Footer
         style={{
           gridRowStart: '3',
