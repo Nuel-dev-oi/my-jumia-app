@@ -126,6 +126,6 @@ function AltThirdHeader({ logoName }) {
       />
     </Div>
   );
-};
+}
 
 export default AltThirdHeader;

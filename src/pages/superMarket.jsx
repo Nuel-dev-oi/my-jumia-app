@@ -9,8 +9,8 @@ const Div = styled.div`
   height: 100vh;
 `;
 
-const Appliance = () => {
-  return <Div>This is the Appliance page</Div>;
+const Super = () => {
+  return <Div>This is the Supermarket page</Div>;
 };
 
-export default Appliance;
+export default Super;
