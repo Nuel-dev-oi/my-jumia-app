@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import flash from '../assets/flash-sale.svg';
 import Item from './Item.jsx';
-import items from '../scripts/dataList.js';
 
 const Div = styled.div`
   font-size: 1.1rem;
@@ -24,7 +23,7 @@ const FlexItem = styled.div`
   cursor: pointer;
 `;
 
-const FlashSale = ({ timer }) => {
+const FlashSale = ({ timer, products, name, style, progress }) => {
   const [second, setSecond] = useState(timer?.second);
   const [minute, setMinute] = useState(timer?.minute);
   const [hour, setHour] = useState(timer?.hour);
@@ -52,23 +51,29 @@ const FlashSale = ({ timer }) => {
 
   return (
     <>
-      <Div>
+      <Div
+        style={{
+          ...style,
+        }}
+      >
         <FlexItem>
-          <Img src={flash} alt="Flash sale" />
-          <span>Flash Sales</span>
+          {timer && <Img src={flash} alt="Flash sale" />}
+          <span>{name}</span>
         </FlexItem>
         <FlexItem>
-          Time Left:{' '}
-          <span
-            style={{
-              fontWeight: '600',
-            }}
-            className="flash-sale"
-          >
-            {String(hour).length === 1 ? `0${hour}` : `${hour}`}h :{' '}
-            {String(minute).length === 1 ? `0${minute}` : `${minute}`}m :{' '}
-            {String(second).length === 1 ? `0${second}` : `${second}`}s
-          </span>
+          {timer ? 'Time Left: ' : null}
+          {timer ? (
+            <span
+              style={{
+                fontWeight: '600',
+              }}
+              className="flash-sale"
+            >
+              {String(hour).length === 1 ? `0${hour}` : `${hour}`}h :{' '}
+              {String(minute).length === 1 ? `0${minute}` : `${minute}`}m :{' '}
+              {String(second).length === 1 ? `0${second}` : `${second}`}s
+            </span>
+          ) : null}
         </FlexItem>
         <FlexItem
           style={{
@@ -78,7 +83,7 @@ const FlashSale = ({ timer }) => {
           See All {'\u203A'}
         </FlexItem>
       </Div>
-      <Item items={items} flag={true} />
+      <Item items={products} flag={true} progress={progress} />
     </>
   );
 };

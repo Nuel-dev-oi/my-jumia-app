@@ -14,6 +14,8 @@ import testing from '../assets/testing.png';
 import FlashSale from '../components/FlashSale.jsx';
 import Item from '../components/Item.jsx';
 import itemList from '../scripts/itemList.js';
+import products from '../scripts/dataList.js';
+import sellers from '../scripts/dataSet.js';
 
 const images = [awoof, upto, more, offer, grocery, secure, deals, toy, testing];
 
@@ -118,6 +120,7 @@ const Home = () => {
             }
           })}
         </ParentFlexDiv>
+
         <SlideDiv
           style={{
             transform: 'rotateZ(180deg)',
@@ -128,14 +131,20 @@ const Home = () => {
           rightX={rightX}
         />
       </OuterDiv>
+
       <TransparentDiv />
+
       <FlashSale
         timer={{
           hour: 1,
           minute: 2,
           second: 59,
         }}
+        products={products}
+        name="Flash Sales"
+        progress={true}
       />
+
       <TransparentDiv />
 
       <Item
@@ -149,6 +158,14 @@ const Home = () => {
       />
 
       <TransparentDiv />
+
+      <FlashSale
+        products={sellers}
+        name="Top Sellers"
+        style={{
+          backgroundColor: 'orangered',
+        }}
+      />
     </>
   );
 };

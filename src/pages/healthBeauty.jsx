@@ -5,8 +5,10 @@ const Div = styled.div`
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  width: 100vw;
   height: 100vh;
+  background-color: #fff;
+  grid-column-start: 2;
+  grid-column-end: span 2;
 `;
 
 const Health = () => {

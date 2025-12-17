@@ -70,7 +70,7 @@ const strings = [
   'computing',
   'baby_products',
   'gaming',
-  'musical_instrumrnts',
+  'musical_instruments',
   'other_categories',
 ];
 

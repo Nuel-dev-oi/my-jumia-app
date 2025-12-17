@@ -67,7 +67,7 @@ const FloatDiv = styled.div`
   position: absolute;
   width: max-content;
   height: max-content;
-  right: 20px;
+  right: 14px;
   top: 2px;
   border-radius: 5px;
   background-color: #ffcff2ff;
@@ -75,7 +75,7 @@ const FloatDiv = styled.div`
   color: rgba(255, 155, 4, 1);
 `;
 
-const Item = ({ items, style, flag }) => {
+const Item = ({ items, style, flag, progress }) => {
   return (
     <FlexDiv
       style={{
@@ -138,13 +138,15 @@ const Item = ({ items, style, flag }) => {
                 }}
               >
                 {flag ? item?.value : null}{' '}
-                {flag
+                {flag && progress
                   ? item?.value === 0 || item?.value === 1
                     ? 'item left'
                     : 'items left'
                   : null}
               </small>
-              {flag ? <ProgressBar max={item.max} value={item.value} /> : null}
+              {flag && progress ? (
+                <ProgressBar max={item.max} value={item.value} />
+              ) : null}
             </InnerDiv>
             {flag ? (
               <FloatDiv>
