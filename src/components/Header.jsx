@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import FirstHeader from './FirstHeader';
 import SecondHeader from './SecondHeader';
@@ -15,7 +15,7 @@ const HeaderContainer = styled.header`
 
 function Header({ logoName, style }) {
   const [isSmall, setIsSmall] = useState(false);
-  const [width, setWidth] = useState(window.innerWidth);
+  const [_, setWidth] = useState(window.innerWidth);
 
   useLayoutEffect(() => {
     const handleResize = () => {
@@ -41,6 +41,7 @@ function Header({ logoName, style }) {
       style={{
         ...style,
       }}
+      className="header"
     >
       <HeaderContainer>
         <FirstHeader logoName={logoName} />

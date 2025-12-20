@@ -22,6 +22,8 @@ import BabyProduct from '../pages/babyProduct.jsx';
 import Gaming from '../pages/gaming.jsx';
 import Musical from '../pages/musical.jsx';
 import Other from '../pages/others.jsx';
+import SignIn from './SignIn.jsx';
+import HolidaySales from './HolidaySale.jsx';
 
 const Main = styled.main`
   width: 100%;
@@ -37,7 +39,7 @@ const Div = styled.div`
 const LayoutGrid = styled.div`
   display: grid;
   grid-template-columns: /*5vw 20vw 69vw 5vw*/ 64px 256px 883.2px 64px;
-  grid-template-rows: 30vh max-content 40vh;
+  grid-template-rows: 179.4px max-content 40vh;
   background-image: url(${layoutImg});
   background-repeat: no-repeat;
   background-position: center;
@@ -77,6 +79,7 @@ const strings = [
 const Layout = ({ children, logoName }) => {
   const [isSmall, setIsSmall] = useState(true);
   const [_, setWidth] = useState(window.innerWidth);
+  const [signIn, setSignIn] = useState(false);
   const [render, setRender] = useState();
   const location = useLocation();
 
@@ -109,6 +112,10 @@ const Layout = ({ children, logoName }) => {
 
   useEffect(() => {
     const handlePages = () => {
+      if (location.pathname === '/holiday_sales') {
+        setRender(() => <HolidaySales />);
+        return;
+      }
       const index = strings.filter((item) => {
         const url = new URL(window.location);
         const regExp = new RegExp(`^/${item}$`);
@@ -118,6 +125,14 @@ const Layout = ({ children, logoName }) => {
       setRender(Pages[i]);
     };
     handlePages();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleSignIn = () => {
+      const page = location.pathname;
+      page === '/sign_in' ? setSignIn(true) : setSignIn(false);
+    };
+    handleSignIn();
   }, [location.pathname]);
 
   return isSmall ? (
@@ -131,16 +146,20 @@ const Layout = ({ children, logoName }) => {
     </>
   ) : (
     <LayoutGrid>
-      <Header
-        logoName={'Jumia'}
-        style={{
-          gridRowStart: '1',
-          gridRowEnd: '2',
-          gridColumnStart: '1',
-          gridColumnEnd: '5',
-          alignSelf: 'stretch',
-        }}
-      />
+      {!signIn ? (
+        <Header
+          logoName={'Jumia'}
+          style={{
+            gridRowStart: '1',
+            gridRowEnd: '2',
+            gridColumnStart: '1',
+            gridColumnEnd: '5',
+            alignSelf: 'stretch',
+          }}
+        />
+      ) : (
+        <SignIn />
+      )}
       {displayLayout ? (
         <Div
           style={{
@@ -226,14 +245,18 @@ const Layout = ({ children, logoName }) => {
       ) : (
         render
       )}
-      <Footer
-        style={{
-          gridRowStart: '3',
-          gridRowEnd: '4',
-          gridColumnStart: '1',
-          gridColumnEnd: '5',
-        }}
-      />
+      {!signIn ? (
+        <Footer
+          style={{
+            gridRowStart: '3',
+            gridRowEnd: '4',
+            gridColumnStart: '1',
+            gridColumnEnd: '5',
+          }}
+        />
+      ) : (
+        <SignIn appName="Jumia" />
+      )}
     </LayoutGrid>
   );
 };

@@ -16,6 +16,7 @@ import Item from '../components/Item.jsx';
 import itemList from '../scripts/itemList.js';
 import products from '../scripts/dataList.js';
 import sellers from '../scripts/dataSet.js';
+import { useNavigate } from 'react-router-dom';
 
 const images = [awoof, upto, more, offer, grocery, secure, deals, toy, testing];
 
@@ -64,6 +65,10 @@ const ParentFlexDiv = styled.div`
 `;
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [loggedIn, _] = useState(
+    JSON.parse(localStorage.getItem('loggedIn')) || false
+  );
   const [width, setWidth] = useState(null);
   const [leftX, setleftX] = useState(null);
   const [rightX, setRightX] = useState(null);
@@ -89,6 +94,12 @@ const Home = () => {
 
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (!loggedIn) {
+      navigate('/holiday_sales');
+    }
+  }, [navigate, loggedIn]);
 
   return (
     <>

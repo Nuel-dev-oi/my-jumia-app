@@ -15,6 +15,8 @@ import BabyProduct from './babyProduct.jsx';
 import Gaming from './gaming.jsx';
 import Musical from './musical.jsx';
 import Other from './others.jsx';
+import SignIn from '../components/SignIn.jsx';
+import HolidaySales from '../components/HolidaySale.jsx';
 
 const Pages = () => {
   return (
@@ -36,6 +38,8 @@ const Pages = () => {
             <Route path="other_categories" element={<Other />} />
           </Route>
           <Route path="/about" element={<About />} />
+          <Route path="/sign_in" element={<SignIn />} />
+          <Route path="/holiday_sales" element={<HolidaySales />} />
         </Routes>
       </Layout>
     </Router>

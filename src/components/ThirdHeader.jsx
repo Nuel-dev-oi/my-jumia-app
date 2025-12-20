@@ -5,7 +5,7 @@ import MenuList from './MenuList';
 import FormSearch from './Form';
 
 const icons = ['user', 'help', 'cart'];
-const data = ['Hi, Emmanuel', 'Help', 'Cart'];
+const data = ['Account', 'Help', 'Cart'];
 
 const Img = styled.img`
   width: 25px;
@@ -40,6 +40,8 @@ const ThirdHeader = ({ logoName }) => {
     position: 'static',
     top: '0',
   });
+
+  const [viewAcc, setViewAcc] = useState('none');
 
   useEffect(() => {
     $(() => {
@@ -76,23 +78,31 @@ const ThirdHeader = ({ logoName }) => {
   });
 
   return (
-    <Div
-      className="thirdHeader"
-      style={{
-        position: position?.position,
-        top: position?.top,
-        zIndex: '100000',
-      }}
-    >
-      <HeadingOne>
-        {`${logoName}`.toUpperCase()}
-        <Img src={logo} alt={`${logoName}'s name`} />
-      </HeadingOne>
-      <FormSearch tag={true} />
-      {data.map((item, i) => (
-        <MenuList index={i} key={i} content={item} icon={icons[i]} />
-      ))}
-    </Div>
+    <>
+      <Div
+        className="thirdHeader"
+        style={{
+          position: position?.position,
+          top: position?.top,
+          zIndex: '100000',
+        }}
+      >
+        <HeadingOne>
+          {`${logoName}`.toUpperCase()}
+          <Img src={logo} alt={`${logoName}'s name`} />
+        </HeadingOne>
+        <FormSearch tag={true} />
+        {data.map((item, i) => (
+          <MenuList
+            account={[viewAcc, setViewAcc]}
+            index={i}
+            key={i}
+            content={item}
+            icon={icons[i]}
+          />
+        ))}
+      </Div>
+    </>
   );
 };
 
