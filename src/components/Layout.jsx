@@ -39,7 +39,7 @@ const Div = styled.div`
 const LayoutGrid = styled.div`
   display: grid;
   grid-template-columns: /*5vw 20vw 69vw 5vw*/ 64px 256px 883.2px 64px;
-  grid-template-rows: 179.4px max-content 40vh;
+  grid-template-rows: 179.4px max-content max-content;
   background-image: url(${layoutImg});
   background-repeat: no-repeat;
   background-position: center;
@@ -253,6 +253,7 @@ const Layout = ({ children, logoName }) => {
             gridColumnStart: '1',
             gridColumnEnd: '5',
           }}
+          logoName="Jumia"
         />
       ) : (
         <SignIn appName="Jumia" />

@@ -16,6 +16,7 @@ import Item from '../components/Item.jsx';
 import itemList from '../scripts/itemList.js';
 import products from '../scripts/dataList.js';
 import sellers from '../scripts/dataSet.js';
+import sponsors from '../scripts/sponsoredList.js';
 import { useNavigate } from 'react-router-dom';
 
 const images = [awoof, upto, more, offer, grocery, secure, deals, toy, testing];
@@ -177,6 +178,21 @@ const Home = () => {
           backgroundColor: 'orangered',
         }}
       />
+
+      <TransparentDiv />
+
+      <FlashSale
+        products={sponsors}
+        name="Sponsored Products"
+        style={{
+          backgroundColor: '#fff',
+        }}
+        color={{
+          color: '#000',
+        }}
+      />
+
+      <TransparentDiv />
     </>
   );
 };
