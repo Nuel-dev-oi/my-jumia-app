@@ -163,7 +163,7 @@ const SignIn = ({ appName }) => {
 
     if (done) {
       localStorage.setItem('loggedIn', JSON.stringify(true));
-      navigate('/');
+      navigate('/', { replace: true });
     }
   };
 

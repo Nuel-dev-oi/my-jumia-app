@@ -107,7 +107,6 @@ const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
 
   useEffect(() => {
     const target = (headerRef.current = document.querySelector('.header'));
-    console.log(target);
     if (!target) return;
 
     const handleScroll = () => {

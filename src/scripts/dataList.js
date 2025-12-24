@@ -20,6 +20,7 @@ export default [
     discount: handleDiscount,
     max: 20,
     value: 2,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Air Conditioner',
@@ -29,6 +30,7 @@ export default [
     discount: handleDiscount,
     max: 50,
     value: 42,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Cooking Utensils',
@@ -38,6 +40,7 @@ export default [
     discount: handleDiscount,
     max: 150,
     value: 72,
+    id: crypto.randomUUID(),
   },
   {
     item: 'IPhone',
@@ -47,6 +50,7 @@ export default [
     discount: handleDiscount,
     max: 10,
     value: 1,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Couch',
@@ -56,6 +60,7 @@ export default [
     discount: handleDiscount,
     max: 1000,
     value: 200,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Standing Fan',
@@ -65,5 +70,6 @@ export default [
     discount: handleDiscount,
     max: 100,
     value: 100,
+    id: crypto.randomUUID(),
   },
 ];

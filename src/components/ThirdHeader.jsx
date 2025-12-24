@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import logo from '../assets/jumia.svg?url';
 import MenuList from './MenuList';
 import FormSearch from './Form';
+import { Link } from 'react-router-dom';
 
 const icons = ['user', 'help', 'cart'];
 const data = ['Account', 'Help', 'Cart'];
@@ -33,9 +34,15 @@ const HeadingOne = styled.h1`
   padding-left: 2%;
   white-space: nowrap;
   font-family: 'Oxanium', sans-serif;
+  a {
+    text-decoration: none;
+    color: #000;
+  }
 `;
 
 const ThirdHeader = ({ logoName }) => {
+  const loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+
   const [position, setPosition] = useState({
     position: 'static',
     top: '0',
@@ -88,19 +95,31 @@ const ThirdHeader = ({ logoName }) => {
         }}
       >
         <HeadingOne>
-          {`${logoName}`.toUpperCase()}
-          <Img src={logo} alt={`${logoName}'s name`} />
+          <Link
+            to="/"
+            style={{
+              color: '#000',
+            }}
+          >
+            {`${logoName}`.toUpperCase()}
+            <Img src={logo} alt={`${logoName}'s name`} />
+          </Link>
         </HeadingOne>
         <FormSearch tag={true} />
-        {data.map((item, i) => (
-          <MenuList
-            account={[viewAcc, setViewAcc]}
-            index={i}
-            key={i}
-            content={item}
-            icon={icons[i]}
-          />
-        ))}
+        {data.map((item, i) => {
+          if (!loggedIn && i == 2) {
+            return;
+          }
+          return (
+            <MenuList
+              account={[viewAcc, setViewAcc]}
+              index={i}
+              key={i}
+              content={item}
+              icon={icons[i]}
+            />
+          );
+        })}
       </Div>
     </>
   );

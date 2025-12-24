@@ -18,6 +18,7 @@ export default [
     price: '11,120',
     formerPrice: '19,000',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
   {
     item: 'NIVEA Sun Sunscreen ...',
@@ -25,6 +26,7 @@ export default [
     price: '21,840',
     formerPrice: '22,450',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
   {
     item: 'itel A100 6.75 90hz Brig...',
@@ -32,6 +34,7 @@ export default [
     price: '103,000',
     formerPrice: '111,280',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Skyrun 4 Burners (4+0) G...',
@@ -39,6 +42,7 @@ export default [
     price: '148,999',
     formerPrice: '174,000',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Tropicwhirl Blender 2L 2...',
@@ -46,6 +50,7 @@ export default [
     price: '21,499',
     formerPrice: '26,640',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Mi+ (MiJ) 43" Inches Digi...',
@@ -53,5 +58,6 @@ export default [
     price: '202,154',
     formerPrice: '222,369',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
 ];

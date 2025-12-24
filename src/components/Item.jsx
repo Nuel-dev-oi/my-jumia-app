@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { change } from '../productSlice.js';
 
 const FlexDiv = styled.div`
   display: flex;
@@ -76,6 +80,16 @@ const FloatDiv = styled.div`
 `;
 
 const Item = ({ items, style, flag, progress }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const productId = useSelector((state) => state.productId);
+
+  useEffect(() => {
+    let prodStorage = JSON.stringify(productId);
+    localStorage.removeItem('productId');
+    localStorage.setItem('productId', prodStorage);
+  }, [productId]);
+
   return (
     <FlexDiv
       style={{
@@ -89,8 +103,16 @@ const Item = ({ items, style, flag, progress }) => {
             style={{
               width: `${flag ? 'calc(100% / 6)' : '250px'}`,
             }}
+            onClick={
+              item.id
+                ? () => {
+                    dispatch(change(item.id));
+                    navigate(`/product/${item.id}`);
+                  }
+                : null
+            }
           >
-            {flag ? <Img src={item.picture} /> : null}
+            {flag ? <Img src={item.picture} id={item.id} /> : null}
             {!flag ? (
               <Img
                 src={item.picture}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaUser, FaQuestionCircle, FaShoppingCart } from 'react-icons/fa';
 import AccountMenu from './AccountMenu';
@@ -9,13 +10,21 @@ const HeaderSpan = styled.span`
   color: #000;
   margin-left: 10px;
   margin-right: 15px;
+  box-shadow: 0px 0px 10px 1px gray;
+  margin: 15px;
+  padding: 10px;
 
   &:hover {
     color: orange;
   }
+
+  &:active {
+    background-color: gray;
+  }
 `;
 
 const MenuList = ({ content, icon, index, account: [viewAcc, setViewAcc] }) => {
+  const navigate = useNavigate();
   const [rotate, setRotate] = useState('-90');
   const [down, setDown] = useState(false);
   const [loggedIn, setLoggedIn] = useState(
@@ -54,26 +63,27 @@ const MenuList = ({ content, icon, index, account: [viewAcc, setViewAcc] }) => {
           down ? setDown(false) : setDown(true);
           down ? setRotate('-90') : setRotate('90');
           icon === icons[0] && handleClick();
+          icon === icons[2] && navigate('/cart');
         }}
       >
         {icon === icons[0] ? (
           <FaUser
             style={{
-              marginInline: '10px',
+              marginRight: '10px',
               marginTop: '2px',
             }}
           />
         ) : icon === icons[1] ? (
           <FaQuestionCircle
             style={{
-              marginInline: '10px',
+              marginRight: '10px',
               marginTop: '2px',
             }}
           />
         ) : icon === icons[2] && loggedIn === true ? (
           <FaShoppingCart
             style={{
-              marginInline: '10px',
+              marginRight: '10px',
               marginTop: '2px',
             }}
           />
@@ -83,7 +93,7 @@ const MenuList = ({ content, icon, index, account: [viewAcc, setViewAcc] }) => {
           style={{
             transform: `rotateZ(${rotate}deg)`,
             display: 'inline-block',
-            marginLeft: `${down ? 16 : 6}px`,
+            marginLeft: `${down && icon !== icons[2] ? 16 : 6}px`,
             fontSize: '1.1rem',
             marginTop: '-3px',
             cursor: 'pointer',

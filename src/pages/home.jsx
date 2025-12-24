@@ -98,7 +98,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!loggedIn) {
-      navigate('/holiday_sales');
+      navigate('/holiday_sales', { replace: true });
     }
   }, [navigate, loggedIn]);
 
@@ -190,9 +190,8 @@ const Home = () => {
         color={{
           color: '#000',
         }}
+        see={true}
       />
-
-      <TransparentDiv />
     </>
   );
 };

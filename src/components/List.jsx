@@ -41,7 +41,12 @@ const List = ({ item, children }) => {
 
   return (
     <Li>
-      <Link to={`/${link.toLowerCase()}`}>
+      <Link
+        to={`/${link.toLowerCase()}`}
+        style={{
+          color: '#000',
+        }}
+      >
         {children} {item}
       </Link>
     </Li>

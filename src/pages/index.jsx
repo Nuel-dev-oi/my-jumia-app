@@ -17,6 +17,8 @@ import Musical from './musical.jsx';
 import Other from './others.jsx';
 import SignIn from '../components/SignIn.jsx';
 import HolidaySales from '../components/HolidaySale.jsx';
+import Cart from '../components/Cart.jsx';
+import Product from '../components/Product.jsx';
 
 const Pages = () => {
   return (
@@ -40,6 +42,8 @@ const Pages = () => {
           <Route path="/about" element={<About />} />
           <Route path="/sign_in" element={<SignIn />} />
           <Route path="/holiday_sales" element={<HolidaySales />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<Product />} />
         </Routes>
       </Layout>
     </Router>

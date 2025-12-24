@@ -18,6 +18,7 @@ export default [
     price: '15,500',
     formerPrice: '17,800',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Power bank',
@@ -25,6 +26,7 @@ export default [
     price: '25,500',
     formerPrice: '27,950',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Body wash',
@@ -32,6 +34,7 @@ export default [
     price: '5,200',
     formerPrice: '7,100',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Water bottle',
@@ -39,6 +42,7 @@ export default [
     price: '1,400',
     formerPrice: '2,700',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Ergonomic chair',
@@ -46,6 +50,7 @@ export default [
     price: '41,600',
     formerPrice: '45,300',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
   {
     item: 'Ear buds',
@@ -53,5 +58,6 @@ export default [
     price: '71,980',
     formerPrice: '82,150',
     discount: handleDiscount,
+    id: crypto.randomUUID(),
   },
 ];

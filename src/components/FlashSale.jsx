@@ -23,7 +23,7 @@ const FlexItem = styled.div`
   cursor: pointer;
 `;
 
-const FlashSale = ({ timer, products, name, style, progress, color }) => {
+const FlashSale = ({ timer, products, name, style, progress, color, see }) => {
   const [second, setSecond] = useState(timer?.second);
   const [minute, setMinute] = useState(timer?.minute);
   const [hour, setHour] = useState(timer?.hour);
@@ -83,10 +83,11 @@ const FlashSale = ({ timer, products, name, style, progress, color }) => {
         </FlexItem>
         <FlexItem
           style={{
+            ...color,
             fontSize: '.9em',
           }}
         >
-          {!color ? 'See All' : null} {!color ? '\u203A' : null}
+          {!see ? 'See All' : null} {!see ? '\u203A' : null}
         </FlexItem>
       </Div>
       <Item items={products} flag={true} progress={progress} />

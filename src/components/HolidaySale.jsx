@@ -20,7 +20,7 @@ const HolidaySales = () => {
 
   useEffect(() => {
     if (loggedIn) {
-      navigate('/');
+      navigate('/', { replace: true });
     }
   }, [navigate, loggedIn]);
 

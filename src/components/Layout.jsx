@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navigation from './Navigation.jsx';
 import SubAds from './SubAds.jsx';
@@ -24,6 +24,8 @@ import Musical from '../pages/musical.jsx';
 import Other from '../pages/others.jsx';
 import SignIn from './SignIn.jsx';
 import HolidaySales from './HolidaySale.jsx';
+import Cart from './Cart.jsx';
+import Product from './Product.jsx';
 
 const Main = styled.main`
   width: 100%;
@@ -39,7 +41,7 @@ const Div = styled.div`
 const LayoutGrid = styled.div`
   display: grid;
   grid-template-columns: /*5vw 20vw 69vw 5vw*/ 64px 256px 883.2px 64px;
-  grid-template-rows: 179.4px max-content max-content;
+  grid-template-rows: 179.4px max-content 15px max-content;
   background-image: url(${layoutImg});
   background-repeat: no-repeat;
   background-position: center;
@@ -77,6 +79,8 @@ const strings = [
 ];
 
 const Layout = ({ children, logoName }) => {
+  const productId = JSON.parse(localStorage.getItem('productId'));
+  const url = useMemo(() => new RegExp(`${productId}`), [productId]);
   const [isSmall, setIsSmall] = useState(true);
   const [_, setWidth] = useState(window.innerWidth);
   const [signIn, setSignIn] = useState(false);
@@ -112,8 +116,16 @@ const Layout = ({ children, logoName }) => {
 
   useEffect(() => {
     const handlePages = () => {
+      if (url.test(location.pathname)) {
+        setRender(() => <Product />);
+        return;
+      }
       if (location.pathname === '/holiday_sales') {
         setRender(() => <HolidaySales />);
+        return;
+      }
+      if (location.pathname === '/cart') {
+        setRender(() => <Cart />);
         return;
       }
       const index = strings.filter((item) => {
@@ -125,7 +137,7 @@ const Layout = ({ children, logoName }) => {
       setRender(Pages[i]);
     };
     handlePages();
-  }, [location.pathname]);
+  }, [location.pathname, url]);
 
   useEffect(() => {
     const handleSignIn = () => {
@@ -248,8 +260,8 @@ const Layout = ({ children, logoName }) => {
       {!signIn ? (
         <Footer
           style={{
-            gridRowStart: '3',
-            gridRowEnd: '4',
+            gridRowStart: '4',
+            gridRowEnd: '5',
             gridColumnStart: '1',
             gridColumnEnd: '5',
           }}
