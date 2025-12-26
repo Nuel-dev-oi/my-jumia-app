@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useEffect, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navigation from './Navigation.jsx';
 import SubAds from './SubAds.jsx';
 import Header from './Header.jsx';
@@ -79,13 +79,15 @@ const strings = [
 ];
 
 const Layout = ({ children, logoName }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const productId = JSON.parse(localStorage.getItem('productId'));
   const url = useMemo(() => new RegExp(`${productId}`), [productId]);
+  const url0 = location.pathname;
   const [isSmall, setIsSmall] = useState(true);
   const [_, setWidth] = useState(window.innerWidth);
   const [signIn, setSignIn] = useState(false);
   const [render, setRender] = useState();
-  const location = useLocation();
 
   const displayLayout =
     location.pathname === '/' || location.pathname === '/about';
@@ -116,10 +118,6 @@ const Layout = ({ children, logoName }) => {
 
   useEffect(() => {
     const handlePages = () => {
-      if (url.test(location.pathname)) {
-        setRender(() => <Product />);
-        return;
-      }
       if (location.pathname === '/holiday_sales') {
         setRender(() => <HolidaySales />);
         return;
@@ -128,6 +126,14 @@ const Layout = ({ children, logoName }) => {
         setRender(() => <Cart />);
         return;
       }
+      if (
+        (url.test(location.pathname) && location.pathname !== '/cart') ||
+        (url0 === location.pathname && /\/product/.test(location.pathname))
+      ) {
+        setRender(() => <Product />);
+        return;
+      }
+
       const index = strings.filter((item) => {
         const url = new URL(window.location);
         const regExp = new RegExp(`^/${item}$`);
@@ -137,7 +143,7 @@ const Layout = ({ children, logoName }) => {
       setRender(Pages[i]);
     };
     handlePages();
-  }, [location.pathname, url]);
+  }, [location.pathname, url, navigate, productId, url0]);
 
   useEffect(() => {
     const handleSignIn = () => {

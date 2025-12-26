@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
+    "axios": "^1.13.2",
     "jquery": "^3.7.1",
     "normalize.css": "^8.0.1",
     "react": "^19.2.0",

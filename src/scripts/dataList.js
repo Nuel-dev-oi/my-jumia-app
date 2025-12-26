@@ -21,6 +21,7 @@ export default [
     max: 20,
     value: 2,
     id: crypto.randomUUID(),
+    favorite: 5,
   },
   {
     item: 'Air Conditioner',
@@ -31,6 +32,7 @@ export default [
     max: 50,
     value: 42,
     id: crypto.randomUUID(),
+    favorite: 4,
   },
   {
     item: 'Cooking Utensils',
@@ -41,6 +43,7 @@ export default [
     max: 150,
     value: 72,
     id: crypto.randomUUID(),
+    favorite: 3,
   },
   {
     item: 'IPhone',
@@ -51,6 +54,7 @@ export default [
     max: 10,
     value: 1,
     id: crypto.randomUUID(),
+    favorite: 1,
   },
   {
     item: 'Couch',
@@ -61,6 +65,7 @@ export default [
     max: 1000,
     value: 200,
     id: crypto.randomUUID(),
+    favorite: 4,
   },
   {
     item: 'Standing Fan',
@@ -71,5 +76,6 @@ export default [
     max: 100,
     value: 100,
     id: crypto.randomUUID(),
+    favorite: 3,
   },
 ];
