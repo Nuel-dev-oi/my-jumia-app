@@ -1,18 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MdFavoriteBorder, MdFlight } from 'react-icons/md';
+import { MdFavoriteBorder } from 'react-icons/md';
 import { MdFlashOn } from 'react-icons/md';
-import { MdOutlineShoppingCart } from 'react-icons/md';
 import styled from 'styled-components';
 import sponsors from '../scripts/sponsoredList.js';
-import dataList from "../scripts/dataList.js";
+import dataList from '../scripts/dataList.js';
 import FlashSale from './FlashSale.jsx';
 import Ratings from './Rating';
 import items from '../scripts';
 import { IoPaperPlane } from 'react-icons/io5';
-import { TbBox, TbFileDescription, TbListDetails, TbRefresh, TbTruckDelivery } from 'react-icons/tb';
-import { FiMessageSquare } from 'react-icons/fi';
+import { TbBox, TbRefresh, TbTruckDelivery } from 'react-icons/tb';
 import axios from 'axios';
+import CartButton from './CarttButton.jsx';
+import Paragraph from './Paragraph.jsx';
+import CartButton0 from './CartButton0.jsx';
 
 const Div = styled.div`
   font-size: 1rem;
@@ -25,6 +26,7 @@ const Div = styled.div`
   background-color: #eeededff;
   grid-column-start: 2;
   grid-column-end: span 2;
+  position: relative;
 `;
 
 const Main = styled.main`
@@ -75,6 +77,7 @@ const Mini = styled.article`
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+  padding: 2px;
 `;
 
 const Seller = styled.article`
@@ -117,33 +120,6 @@ const Price = styled.div`
   align-items: center;
 `;
 
-const CartButton = styled.div`
-  box-shadow: 0px 0px 15px 0px gray;
-  height: 78%;
-  background-color: rgba(254, 126, 28, 1);
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  position: relative;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba(233, 104, 5, 1);
-  }
-  &:active {
-    box-shadow: 0px 0px 10px 0px gray;
-  }
-`;
-
-const CartDiv = styled.div`
-  box-shadow: 0px 1px 1px 1px #eee;
-  width: 99%;
-  height: 70px;
-  margin-top: 15px;
-`;
-
 const FloatSpan = styled.span`
   background-color: #fff;
   width: 40px;
@@ -178,18 +154,6 @@ const Flex = styled.div`
   height: max-content;
 `;
 
-const Paragraph = styled.div`
-  width: 100%;
-  margin: 0px;
-  height: 110px;
-  font-size: 1.2em;
-  box-shadow: 0px 1px 1px 1px #eee;
-
-  &:hover {
-    background-color: rgba(201, 199, 199, 1);
-  }
-`;
-
 function handleDiscount(formerPrice, price) {
   let oldPrice = Number(formerPrice?.replace(/,/g, ''));
   let newPrice = Number(price?.replace(/,/g, ''));
@@ -199,24 +163,61 @@ function handleDiscount(formerPrice, price) {
 const Product = () => {
   const location = useLocation();
   const ref = useRef();
+  const miniRef = useRef();
+  const productRef = useRef();
+  const feedRef = useRef();
+  const specRef = useRef();
   const [product, setProduct] = useState();
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(true);
+  const [position, setposition] = useState({ top: '0', pos: 'static' });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const rect = productRef.current.getBoundingClientRect();
+      let isScrolling = true;
+      if (isScrolling) {
+        if (rect.y <= 85) {
+          setposition({
+            pos: 'fixed',
+            top: '90px',
+            right: '67px',
+            width: '275px',
+          });
+        } else {
+          setposition({ pos: 'static', width: '' });
+        }
+
+        if (rect.y <= -280) {
+          setposition({
+            pos: 'absolute',
+            top: `385px`,
+            right: '0px',
+            width: '275px',
+          });
+        }
+      }
+      isScrolling = false;
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get("https://fakestoreapi.com/products/category/electronics");
+        const res = await axios.get(
+          'https://fakestoreapi.com/products/category/electronics'
+        );
         setLoading(false);
-        console.log(res.data);
         setDetails(res.data[0]);
-      } catch(err) {
-        console.log(err);
-        setDetails("Product details not Found");
+      } catch (Error) {
+        setDetails(`${Error.message}: Product details not Found`);
       } finally {
         setLoading(false);
       }
-    }
+    };
 
     fetchProduct();
   }, []);
@@ -405,18 +406,7 @@ const Product = () => {
           >
             (5000 verified ratings)
           </span>
-          <CartDiv>
-            <CartButton>
-              <MdOutlineShoppingCart
-                size={24}
-                style={{
-                  position: 'absolute',
-                  left: '20px',
-                }}
-              />
-              Add to cart
-            </CartButton>
-          </CartDiv>
+          <CartButton />
           <div>
             <h2
               style={{
@@ -469,220 +459,238 @@ const Product = () => {
       <Delivery>
         <Para
           style={{
-            height: "max-content",
-            fontSize: ".9em",
-            padding: "10px",
-            fontWeight: "300",
-            color: "#000",
+            height: 'max-content',
+            fontSize: '.9em',
+            padding: '10px',
+            fontWeight: '300',
+            color: '#000',
           }}
         >
           DELIVERY & RETURNS
         </Para>
         <Para
           style={{
-            height: "max-content",
-            fontSize: ".9em",
-            padding: "7px",
-            fontWeight: "300",
-            color: "#000",
+            height: 'max-content',
+            fontSize: '.9em',
+            padding: '7px',
+            fontWeight: '300',
+            color: '#000',
           }}
         >
           <h3
             style={{
-              fontWeight: "400",
-              fontSize: ".9em",
-              padding: "4px",
-              margin: "0px",
+              fontWeight: '400',
+              fontSize: '.9em',
+              padding: '4px',
+              margin: '0px',
             }}
-          >JUMIA 
+          >
+            JUMIA
             <span
               style={{
-                color: "rgba(255, 7, 7, 1)"
+                color: 'rgba(255, 7, 7, 1)',
               }}
             >
-              <IoPaperPlane 
+              <IoPaperPlane
                 style={{
-                  verticalAlign: "-1px",
+                  verticalAlign: '-1px',
                 }}
-              /> 
+              />
               EXPRESS
             </span>
           </h3>
           <p
             style={{
-              margin: "0px",
-              fontSize: "12.3px",
+              margin: '0px',
+              fontSize: '12.3px',
             }}
-          >The BEST products, delivered faster. Now PAY on
-            DELIVERY, Cash or Bank Transfer Anywhere, Zero 
-            Wahala!</p>
+          >
+            The BEST products, delivered faster. Now PAY on DELIVERY, Cash or
+            Bank Transfer Anywhere, Zero Wahala!
+          </p>
         </Para>
-      <h2
-        style={{
-          fontSize: "1.1em",
-          fontWeight: "400",
-          padding: "0px",
-          marginBlock: "10px",
-        }}
-      >Choose your Location</h2>
-      <Select>
-        <option>Lagos</option>
-        <option>Abuja</option>
-      </Select>
-      <Select>
-        <option>ALIMOSHO</option>
-        <option>AJAH</option>
-      </Select>
+        <h2
+          style={{
+            fontSize: '1.1em',
+            fontWeight: '400',
+            padding: '0px',
+            marginBlock: '10px',
+            paddingLeft: '5px',
+          }}
+        >
+          Choose your Location
+        </h2>
+        <Select>
+          <option>Lagos</option>
+          <option>Abuja</option>
+        </Select>
+        <Select>
+          <option>ALIMOSHO</option>
+          <option>AJAH</option>
+        </Select>
 
-      <Para
-      style={{
-        height: "max-content",
-      }}>
+        <Para
+          style={{
+            height: 'max-content',
+          }}
+        >
+          <Flex
+            style={{
+              border: 'none',
+            }}
+          >
+            <span
+              style={{
+                border: '1px solid #000',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                boxShadow: '0px 2px 5px 1px #eee',
+                margin: '10px',
+                flex: '1 0 auto',
+                borderRadius: '4px',
+              }}
+            >
+              <TbBox
+                size={30}
+                style={{
+                  verticalAlign: 'middle',
+                }}
+              />
+            </span>
+            <div>
+              <h3
+                style={{
+                  fontWeight: '400',
+                  fontSize: '.7em',
+                  padding: '4px',
+                  margin: '0px',
+                }}
+              >
+                Pick up Station
+              </h3>
+              <p
+                style={{
+                  fontWeight: '200',
+                  fontSize: '.6em',
+                  padding: '4px',
+                  margin: '0px',
+                  height: 'max-content',
+                  color: '#000',
+                }}
+              >
+                Delivery Fees <bold>{'\u20a6'} 750</bold> ready for pickup
+                between <bold>02 January</bold> and <bold>09 January</bold> if
+                you place your order within the next <bold>9hrs 53mins </bold>
+              </p>
+            </div>
+          </Flex>
+
+          <Flex
+            style={{
+              border: 'none',
+            }}
+          >
+            <span
+              style={{
+                border: '1px solid #000',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                boxShadow: '0px 2px 5px 1px #eee',
+                margin: '10px',
+                flex: '1 0 auto',
+                borderRadius: '4px',
+              }}
+            >
+              <TbTruckDelivery
+                size={30}
+                style={{
+                  verticalAlign: 'middle',
+                }}
+              />
+            </span>
+            <div>
+              <h3
+                style={{
+                  fontWeight: '400',
+                  fontSize: '.7em',
+                  padding: '4px',
+                  margin: '0px',
+                }}
+              >
+                Door Dellivery
+              </h3>
+              <p
+                style={{
+                  fontWeight: '200',
+                  fontSize: '.6em',
+                  padding: '4px',
+                  margin: '0px',
+                  height: 'max-content',
+                  color: '#000',
+                }}
+              >
+                Delivery Fees <bold>{'\u20a6'} 1,710</bold> Ready for delivery
+                between <bold>02 January</bold> and <bold>09 January</bold>
+                if you place your order within the next{' '}
+                <bold>9hrs 53mins </bold>
+              </p>
+            </div>
+          </Flex>
+        </Para>
         <Flex
           style={{
-            border: "none"
+            border: 'none',
           }}
         >
           <span
             style={{
-              border: "1px solid #000",
-              width: "40px",
-              height: "40px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              boxShadow: "0px 2px 5px 1px #eee",
-              margin: "10px",
-              flex: "1 0 auto",
-              borderRadius: "4px",
+              border: '1px solid #000',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              boxShadow: '0px 2px 5px 1px #eee',
+              margin: '10px',
+              flex: '1 0 auto',
+              borderRadius: '4px',
             }}
           >
-            <TbBox size ={30} 
+            <TbRefresh
+              size={30}
               style={{
-                verticalAlign: "middle",
+                verticalAlign: 'middle',
               }}
-          /></span>
+            />
+          </span>
           <div>
             <h3
               style={{
-              fontWeight: "400",
-              fontSize: ".7em",
-              padding: "4px",
-              margin: "0px",
-            }}
-            >Pick up Station</h3>
-            <p
-              style={{
-              fontWeight: "200",
-              fontSize: ".6em",
-              padding: "4px",
-              margin: "0px",
-              height: "max-content",
-              color: "#000",
-            }}
-            >
-              Delivery Fees <bold>{"\u20a6"} 750</bold>{" "}
-              ready for pickup between <bold>02 January</bold> and <bold>09 January</bold> {" "}
-              if you place your order within the next <bold>9hrs 53mins </bold>
-            </p>
-          </div>
-        </Flex>
-
-         <Flex
-          style={{
-            border: "none"
-          }}
-        >
-          <span
-            style={{
-              border: "1px solid #000",
-              width: "40px",
-              height: "40px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              boxShadow: "0px 2px 5px 1px #eee",
-              margin: "10px",
-              flex: "1 0 auto",
-              borderRadius: "4px",
-            }}
-          >
-            <TbTruckDelivery size ={30} 
-              style={{
-                verticalAlign: "middle",
+                fontWeight: '400',
+                fontSize: '.8em',
+                padding: '4px',
+                margin: '0px',
               }}
-          /></span>
-          <div>
-            <h3
-              style={{
-              fontWeight: "400",
-              fontSize: ".7em",
-              padding: "4px",
-              margin: "0px",
-            }}
-            >Door Dellivery</h3>
+            >
+              Return Policy
+            </h3>
             <p
               style={{
-              fontWeight: "200",
-              fontSize: ".6em",
-              padding: "4px",
-              margin: "0px",
-              height: "max-content",
-              color: "#000",
-            }}
-            >
-              Delivery Fees <bold>{"\u20a6"} 1,710</bold>{" "}
-              Ready for delivery between <bold>02 January</bold> and <bold>09 January</bold>
-              if you place your order within the next <bold>9hrs 53mins </bold>
-            </p>
-          </div>
-        </Flex>
-        
-      </Para>
-       <Flex
-          style={{
-            border: "none"
-          }}
-        >
-          <span
-            style={{
-              border: "1px solid #000",
-              width: "40px",
-              height: "40px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              boxShadow: "0px 2px 5px 1px #eee",
-              margin: "10px",
-              flex: "1 0 auto",
-              borderRadius: "4px",
-            }}
-          >
-            <TbRefresh size ={30} 
-              style={{
-                verticalAlign: "middle",
+                fontWeight: '200',
+                fontSize: '.8em',
+                padding: '4px',
+                margin: '0px',
+                height: 'max-content',
+                color: '#000',
               }}
-          /></span>
-          <div>
-            <h3
-              style={{
-              fontWeight: "400",
-              fontSize: ".8em",
-              padding: "4px",
-              margin: "0px",
-            }}
-            >Return Policy</h3>
-            <p
-              style={{
-              fontWeight: "200",
-              fontSize: ".8em",
-              padding: "4px",
-              margin: "0px",
-              height: "max-content",
-              color: "#000",
-            }}
             >
-            Free return within 7 days for ALL eligible items
+              Free return within 7 days for ALL eligible items
             </p>
           </div>
         </Flex>
@@ -690,9 +698,9 @@ const Product = () => {
       <Seller>
         <Para
           style={{
-            height: "max-content",
-            fontSize: ".9em",
-            padding: "8px",
+            height: 'max-content',
+            fontSize: '.9em',
+            padding: '8px',
           }}
         >
           SELLER INFORMATION
@@ -700,229 +708,194 @@ const Product = () => {
         <div>
           <p
             style={{
-              fontWeight: "200",
-              fontSize: ".8em",
-              padding: "4px",
-              margin: "5px",
-              height: "max-content",
-              color: "#000",
+              fontWeight: '200',
+              fontSize: '.8em',
+              padding: '4px',
+              margin: '5px',
+              height: 'max-content',
+              color: '#000',
             }}
-          >Jumia</p>
+          >
+            Jumia
+          </p>
           <p
             style={{
-              fontWeight: "200",
-              fontSize: ".8em",
-              padding: "4px",
-              margin: "5px",
-              height: "max-content",
-              color: "#000",
+              fontWeight: '200',
+              fontSize: '.8em',
+              padding: '4px',
+              margin: '5px',
+              height: 'max-content',
+              color: '#000',
             }}
-          ><bold
-            style={{
-              fontWeight: "500",
-              fontSize: "1em",
-              padding: "0px",
-              margin: "0px",
-              height: "max-content",
-              color: "#000",
-            }}
-          >100</bold>% Seller Score</p>
+          >
+            <bold
+              style={{
+                fontWeight: '500',
+                fontSize: '1em',
+                padding: '0px',
+                margin: '0px',
+                height: 'max-content',
+                color: '#000',
+              }}
+            >
+              100
+            </bold>
+            % Seller Score
+          </p>
         </div>
       </Seller>
-      <Mini>
+      <Mini
+        className="mini"
+        ref={miniRef}
+        style={{
+          top: `${position.top}`,
+          position: `${position.pos}`,
+          right: `${position.right}`,
+          width: `${position.width}`,
+        }}
+      >
         <div
           style={{
-            flex: "0 0 auto",
-            height: "max-content",
-            backgroundColor: "#fff",
+            flex: '0 0 auto',
+            height: 'max-content',
+            backgroundColor: '#fff',
           }}
         >
           <Paragraph
-            style={{
-              height: "max-content",
-              padding: "10px",
-              fontSize: ".9em",
-              backgroundColor: "#817c7cff",
-              borderRadius: "5px",
-            }}
-          > <TbFileDescription size={25} 
-            style={{
-              verticalAlign: "middle",
-              marginRight: "20px"
+            refer={{
+              detail: productRef,
+              specification: specRef,
+              feedback: feedRef,
             }}
           />
-            Product details</Paragraph>
-          <Paragraph
-            style={{
-              height: "max-content",
-              padding: "10px",
-              fontSize: ".9em",
-              borderRadius: "5px",
-            }}
-          > <TbListDetails size={25} 
-            style={{
-              verticalAlign: "middle",
-              marginRight: "20px"
-            }}
-            />
-            Specifications</Paragraph>
-          <Paragraph
-            style={{
-              height: "max-content",
-              padding: "10px",
-              whiteSpace: "nowrap",
-              fontSize: ".9em",
-              borderRadius: "5px",
-            }}
-          > <FiMessageSquare size={25} 
-            style={{
-              verticalAlign: "middle",
-              marginRight: "20px"
-            }}
-            />
-            Verified Customer Feedback</Paragraph>
         </div>
         <div
-         style={{
-            flex: "0 0 auto",
-            height: "max-content",
-            backgroundColor: "#fff",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
+          style={{
+            flex: '0 0 auto',
+            height: 'max-content',
+            backgroundColor: '#fff',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
           }}
         >
           <div
             style={{
-              display: "flex",
-              flexWrap: "nowrap",
-              height: "70%",
+              display: 'flex',
+              flexWrap: 'nowrap',
+              height: '70%',
             }}
           >
-            <img src={product?.picture} alt="prouct img" 
+            <img
+              src={product?.picture}
+              alt="prouct img"
               style={{
-                width: "40%",
-                height: "100px",
+                width: '40%',
+                height: '100px',
               }}
             />
-              <div
-                style={{
-                  margin: "0px",
-                  marginInline: "10px",
-                  width: "60%",
-                }}
-              >
-                <p
-                  style={{
-                    margin: "0px",
-                    padding: "5px",
-                    paddingBottom: "0px",
-                  }}
-                >{ product?.item }</p>
-                  <p
-                    style={{
-                    margin: "0px",
-                    padding: "5px",
-                    paddingBottom: "0px",
-                    fontWeight: "500",
-                  }}
-                  >{"\u20a6"}{" "}{ product?.price }</p>
-                  <p
-                    style={{
-                    margin: "0px",
-                    padding: "5px",
-                    paddingTop: "0px",
-                    textDecoration: "line-through",
-                    fontSize: ".8em",
-                    fontWeight: "200",
-                    display: "inline-block"
-                  }}
-                  >{"\u20a6"}{" "}{ product?.formerPrice }
-                  </p>
-                  <span
-                    style={{
-                      fontSize: '.7em',
-                      backgroundColor: '#ffcff2ff',
-                      padding: '4px',
-                      color: 'rgba(255, 155, 4, 1)',
-                      borderRadius: '5px',
-                      textDecoration: "none",
-                    }}
-                  >
-                  {handleDiscount(product?.formerPrice, product?.price)}%
-                  </span>
-              </div>
-            </div>
-            <CartDiv
+            <div
               style={{
-                width: "95%",
-                alignSelf: "center",
+                margin: '0px',
+                marginInline: '10px',
+                width: '60%',
               }}
             >
-              <CartButton
+              <p
                 style={{
-                  height: "60%",
-                  marginTop: "15px",
+                  margin: '0px',
+                  padding: '5px',
+                  paddingBottom: '0px',
                 }}
               >
-                <MdOutlineShoppingCart
-                  size={24}
-                  style={{
-                    position: 'absolute',
-                    left: '20px',
-                  }}
-                />
-                Add to cart
-              </CartButton>
-          </CartDiv>
+                {product?.item}
+              </p>
+              <p
+                style={{
+                  margin: '0px',
+                  padding: '5px',
+                  paddingBottom: '0px',
+                  fontWeight: '500',
+                }}
+              >
+                {'\u20a6'} {product?.price}
+              </p>
+              <p
+                style={{
+                  margin: '0px',
+                  padding: '5px',
+                  paddingTop: '0px',
+                  textDecoration: 'line-through',
+                  fontSize: '.8em',
+                  fontWeight: '200',
+                  display: 'inline-block',
+                }}
+              >
+                {'\u20a6'} {product?.formerPrice}
+              </p>
+              <span
+                style={{
+                  fontSize: '.7em',
+                  backgroundColor: '#ffcff2ff',
+                  padding: '4px',
+                  color: 'rgba(255, 155, 4, 1)',
+                  borderRadius: '5px',
+                  textDecoration: 'none',
+                }}
+              >
+                {handleDiscount(product?.formerPrice, product?.price)}%
+              </span>
+            </div>
+          </div>
+          <CartButton0 />
         </div>
       </Mini>
-      <Detail>
+      <Detail ref={productRef}>
         <Para
           style={{
-            height: "max-content",
-            padding: "10px",
-
+            height: 'max-content',
+            padding: '10px',
           }}
         >
           Product details
         </Para>
         <div
           style={{
-            padding: "10px",
-            fontSize: ".9em",
+            padding: '10px',
+            fontSize: '.9em',
           }}
         >
-          {
-            loading ? <p> Loading ...</p> :
+          {loading ? (
+            <p> Loading ...</p>
+          ) : (
             <p>{details.description || details}.</p>
-          }
+          )}
         </div>
       </Detail>
-      <Specification>
+      <Specification ref={specRef}>
         <Para
           style={{
-            height: "max-content",
-            padding: "10px",
-
+            height: 'max-content',
+            padding: '10px',
           }}
         >
           Specifications
         </Para>
         <div
           style={{
-            padding: "10px",
-            fontSize: ".9em",
+            padding: '10px',
+            fontSize: '.9em',
           }}
         >
-          {
-            loading ? <p> Loading ...</p> :
-            <p>{details.title || "Product Specs not Found"}.</p>
-          }
+          {loading ? (
+            <p> Loading ...</p>
+          ) : (
+            <p>{details.title || 'Product Specs not Found'}.</p>
+          )}
         </div>
       </Specification>
       <Customer>
-         <FlashSale
+        <FlashSale
           products={dataList}
           name="Customers who viewed this also viewed "
           style={{
@@ -935,23 +908,23 @@ const Product = () => {
           see={true}
         />
       </Customer>
-      <FeedBack>
+      <FeedBack ref={feedRef}>
         <Para
           style={{
-            height: "max-content",
-            padding: "10px",
-            fontSize: ".9em"
-          }}>
-            Verified Customer Feedback
-          </Para>
-          <p
-            style={{
-              padding: "5px",
-            }}
-          >
-            <Ratings favorite={product?.favorite} />
-          </p>
-          
+            height: 'max-content',
+            padding: '10px',
+            fontSize: '.9em',
+          }}
+        >
+          Verified Customer Feedback
+        </Para>
+        <p
+          style={{
+            padding: '5px',
+          }}
+        >
+          Ratings: <Ratings favorite={product?.favorite} />
+        </p>
       </FeedBack>
     </Div>
   );

@@ -74,6 +74,7 @@ const Cart = () => {
     JSON.parse(localStorage.getItem('loggedIn')) || false
   );
   const navigate = useNavigate();
+  const [isEmpty, setIsEmpty] = useState(true);
 
   useEffect(() => {
     if (!loggedIn) {
@@ -85,29 +86,31 @@ const Cart = () => {
   return (
     <>
       <Div>
-        <InnerDiv>
-          <ImgDiv>
-            <Img src={cart} alt="Large cart" />
-          </ImgDiv>
-          <P
-            style={{
-              fontWeight: '400',
-            }}
-          >
-            Your cart is empty
-          </P>
-          <P>Browse our categories and discover our best deals!</P>
-          <Button>
-            <Link
-              to="/"
+        {isEmpty ? (
+          <InnerDiv>
+            <ImgDiv>
+              <Img src={cart} alt="Large cart" />
+            </ImgDiv>
+            <P
               style={{
-                color: '#fff',
+                fontWeight: '400',
               }}
             >
-              Start shopping
-            </Link>
-          </Button>
-        </InnerDiv>
+              Your cart is empty
+            </P>
+            <P>Browse our categories and discover our best deals!</P>
+            <Button>
+              <Link
+                to="/"
+                style={{
+                  color: '#fff',
+                }}
+              >
+                Start shopping
+              </Link>
+            </Button>
+          </InnerDiv>
+        ) : null}
         <FlashSale
           products={sponsors}
           name="Recently Viewed"

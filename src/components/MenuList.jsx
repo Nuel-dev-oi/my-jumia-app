@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaUser, FaQuestionCircle, FaShoppingCart } from 'react-icons/fa';
-import AccountMenu from './AccountMenu';
+import AccountMenu from './AccountMenu.jsx';
+import CartScreen from './CartScreen.jsx';
+import { MdOutlineShoppingCart } from 'react-icons/md';
+import { HiOutlineQuestionMarkCircle, HiOutlineUser } from 'react-icons/hi';
 
 const icons = ['user', 'help', 'cart'];
 
@@ -13,6 +16,7 @@ const HeaderSpan = styled.span`
   box-shadow: 0px 0px 10px 1px gray;
   margin: 15px;
   padding: 10px;
+  position: relative;
 
   &:hover {
     color: orange;
@@ -35,19 +39,19 @@ const MenuList = ({ content, icon, index, account: [viewAcc, setViewAcc] }) => {
     viewAcc == 'none' ? setViewAcc('flex') : setViewAcc('none');
   };
 
-  const handleScroll = () => {
-    if (viewAcc === 'flex') {
-      setDown(false);
-      setRotate('-90');
-      setViewAcc('none');
-    }
-  };
-
   useEffect(() => {
+    const handleScroll = () => {
+      if (viewAcc === 'flex') {
+        setDown(false);
+        setRotate('-90');
+        setViewAcc('none');
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [viewAcc]);
+  }, [setViewAcc, viewAcc]);
 
   return (
     <>
@@ -67,25 +71,28 @@ const MenuList = ({ content, icon, index, account: [viewAcc, setViewAcc] }) => {
         }}
       >
         {icon === icons[0] ? (
-          <FaUser
+          <HiOutlineUser
             style={{
-              marginRight: '10px',
-              marginTop: '2px',
+              marginRight: '5px',
+              marginTop: '-5px',
             }}
+            size={22}
           />
         ) : icon === icons[1] ? (
-          <FaQuestionCircle
+          <HiOutlineQuestionMarkCircle
             style={{
-              marginRight: '10px',
-              marginTop: '2px',
+              marginRight: '5px',
+              marginTop: '-5px',
             }}
+            size={22}
           />
         ) : icon === icons[2] && loggedIn === true ? (
-          <FaShoppingCart
+          <MdOutlineShoppingCart
             style={{
-              marginRight: '10px',
-              marginTop: '2px',
+              marginRight: '5px',
+              marginTop: '-5px',
             }}
+            size={22}
           />
         ) : null}{' '}
         {icon !== icons[2] ? content : loggedIn === true ? content : null}{' '}
@@ -101,6 +108,7 @@ const MenuList = ({ content, icon, index, account: [viewAcc, setViewAcc] }) => {
         >
           {index === 2 ? null : ' \u2039'}
         </span>
+        {index === 2 && <CartScreen />}
       </HeaderSpan>
 
       <AccountMenu

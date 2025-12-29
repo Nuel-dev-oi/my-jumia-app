@@ -7,8 +7,16 @@ const cartSlice = createSlice({
     add: (state, action) => {
       state.push(action.payload);
     },
+    increment: (state, action) => {
+      state[action.payload].itemCount += 1;
+    },
+    decrement: (state, action) => {
+      if (state[action.payload].itemCount > 1) {
+        state[action.payload].itemCount -= 1;
+      }
+    },
   },
 });
 
-export const { add } = cartSlice.actions;
+export const { add, increment, decrement } = cartSlice.actions;
 export default cartSlice.reducer;
