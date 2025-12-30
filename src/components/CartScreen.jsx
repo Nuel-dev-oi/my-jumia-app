@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 const Div = styled.div`
   position: absolute;
   top: 0px;
-  right: 42px;
+  right: 40px;
   width: 15px;
   height: 15px;
   background-color: orange;

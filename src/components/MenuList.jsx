@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { FaUser, FaQuestionCircle, FaShoppingCart } from 'react-icons/fa';
 import AccountMenu from './AccountMenu.jsx';
 import CartScreen from './CartScreen.jsx';
 import { MdOutlineShoppingCart } from 'react-icons/md';

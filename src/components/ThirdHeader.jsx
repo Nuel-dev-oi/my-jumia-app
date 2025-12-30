@@ -34,6 +34,7 @@ const HeadingOne = styled.h1`
   padding-left: 2%;
   white-space: nowrap;
   font-family: 'Oxanium', sans-serif;
+
   a {
     text-decoration: none;
     color: #000;

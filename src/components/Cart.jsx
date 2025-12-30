@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import cart from '../assets/largeCart.png';
 import sponsors from '../scripts/sponsoredList.js';
 import FlashSale from './FlashSale.jsx';
+import { useSelector } from 'react-redux';
+import CartItem from './CartItem.jsx';
 
 const Div = styled.div`
   font-size: 1rem;
@@ -74,7 +76,16 @@ const Cart = () => {
     JSON.parse(localStorage.getItem('loggedIn')) || false
   );
   const navigate = useNavigate();
-  const [isEmpty, setIsEmpty] = useState(true);
+  const [isEmpty, setIsEmpty] = useState(false);
+  const cartStorage = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    const handleIsEmpty = () => {
+      cartStorage.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
+    };
+
+    handleIsEmpty();
+  }, [cartStorage]);
 
   useEffect(() => {
     if (!loggedIn) {
@@ -82,7 +93,6 @@ const Cart = () => {
     }
   }, [navigate, loggedIn]);
 
-  console.log(JSON.parse(localStorage.getItem('cart')));
   return (
     <>
       <Div>
@@ -110,7 +120,9 @@ const Cart = () => {
               </Link>
             </Button>
           </InnerDiv>
-        ) : null}
+        ) : (
+          <CartItem />
+        )}
         <FlashSale
           products={sponsors}
           name="Recently Viewed"

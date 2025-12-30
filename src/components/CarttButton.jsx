@@ -80,7 +80,6 @@ const CartButton = () => {
   const itemIndex = () => {
     const pathname = location.pathname;
     const cart = JSON.parse(localStorage.getItem('cartItems'));
-    console.log(cart);
     const index = cart.findIndex(
       (item) =>
         item.productId === pathname.substring(pathname.lastIndexOf('/') + 1)

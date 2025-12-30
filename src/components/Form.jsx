@@ -11,10 +11,6 @@ const Input = styled.input`
   font-size: 1.1rem;
   border-radius: 2px;
   flex: 1 0 auto;
-
-  @media (max-width: 700px) {
-    width: 205%;
-  }
 `;
 
 const Form = styled.form`
