@@ -213,7 +213,7 @@ const CartButton = () => {
           </Select>
         )}
       </CartDiv>
-      {added ? <Screen screen="added" /> : null}
+      {added ? <Screen screen="Product added sucessfully" /> : null}
     </>
   );
 };

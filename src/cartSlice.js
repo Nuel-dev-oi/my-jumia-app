@@ -20,8 +20,12 @@ const cartSlice = createSlice({
         state.splice(action.payload, 1);
       }
     },
+    removeAll: (state) => {
+      state.splice(0, state.length);
+    },
   },
 });
 
-export const { add, increment, decrement, removeItem } = cartSlice.actions;
+export const { add, increment, decrement, removeItem, removeAll } =
+  cartSlice.actions;
 export default cartSlice.reducer;

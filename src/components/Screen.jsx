@@ -26,7 +26,7 @@ const Screen = ({ screen }) => {
       {seen ? (
         <Div>
           <FaCheck style={{ marginRight: '10px' }} />
-          Product {screen} sucessfully
+          {screen}
           <FaTimesCircle
             style={{
               marginLeft: '10px',

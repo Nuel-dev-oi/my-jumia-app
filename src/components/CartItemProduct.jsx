@@ -293,7 +293,7 @@ const CartItemProduct = ({ product }) => {
           index={indexRef}
         />
       )}
-      {remove && <Screen screen={'removed'} />}
+      {remove && <Screen screen="Product removed from cart" />}
     </>
   );
 };

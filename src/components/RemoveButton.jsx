@@ -40,7 +40,7 @@ const CartDiv = styled.div`
 
 const Div = styled.div`
   position: fixed;
-  top: 40%;
+  top: 35%;
   left: 30%;
   background-color: #fff;
   width: 550px;
@@ -51,6 +51,7 @@ const Div = styled.div`
   justify-content: flex-start;
   font-size: 0.9em;
   opacity: 1;
+  border-radius: 5px;
 `;
 
 const H2 = styled.h2`
@@ -108,13 +109,13 @@ const RemoveButton = ({ onSetRemove, onRemove, index }) => {
         <CartDiv>
           <CartButton
             onClick={() => {
-              dispatch(removeItem(index.current));
               onRemove(true);
               onSetRemove(false);
               document.body.style.overflow = '';
               setTimeout(() => {
                 onRemove(false);
-              }, 5000);
+                dispatch(removeItem(index.current));
+              }, 900);
             }}
           >
             <FiTrash2

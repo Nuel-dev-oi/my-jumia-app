@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { add } from '../cartSlice.js';
 import { useLocation } from 'react-router-dom';
+import Screen from './Screen.jsx';
 
 const CartButt = styled.div`
   box-shadow: 0px 0px 15px 0px gray;
@@ -42,47 +43,59 @@ const CartButton0 = () => {
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const location = useLocation();
-
+  const [added, setAdded] = useState(false);
+  const [info, setInfo] = useState('Product added sucessfully');
   useEffect(() => {
     const current = cartRef.current;
     const pathname = location.pathname;
     const productId = pathname.substring(pathname.lastIndexOf('/') + 1);
 
     const handleClick = () => {
-      dispatch(
-        add({
-          productId,
-          itemCount: 1,
-        })
-      );
-    };
-    current.addEventListener('click', handleClick);
-    const cartStorage = JSON.stringify(cartItems);
-    localStorage.removeItem('cartItems');
-    localStorage.setItem('cartItems', cartStorage);
+      let flag;
+      const prod = cartItems.find((item) => item.productId === productId);
+      if (!prod) {
+        setAdded(true);
+        flag = true;
+        dispatch(
+          add({
+            productId,
+            itemCount: 1,
+          })
+        );
+      }
+      if (prod) {
+        setInfo('Product already in cart');
+        setAdded(true);
+        setTimeout(() => setAdded(false), 5000);
+      }
 
-    const cart = JSON.parse(localStorage.getItem('cartItems'));
-    const _ = cart.findIndex(
-      (item) =>
-        item.productId === pathname.substring(pathname.lastIndexOf('/') + 1)
-    );
+      if (flag) {
+        setTimeout(() => setAdded(false), 5000);
+        flag = false;
+      }
+    };
+
+    current.addEventListener('click', handleClick);
 
     return () => current.removeEventListener('click', handleClick);
-  }, [cartItems, location.pathname, dispatch]);
+  }, [cartItems, location.pathname, dispatch, added]);
 
   return (
-    <CartDiv ref={cartRef}>
-      <CartButt>
-        <MdOutlineShoppingCart
-          size={24}
-          style={{
-            position: 'absolute',
-            left: '20px',
-          }}
-        />
-        Add to cart
-      </CartButt>
-    </CartDiv>
+    <>
+      <CartDiv ref={cartRef}>
+        <CartButt>
+          <MdOutlineShoppingCart
+            size={24}
+            style={{
+              position: 'absolute',
+              left: '20px',
+            }}
+          />
+          Add to cart
+        </CartButt>
+      </CartDiv>
+      {added && <Screen screen={info} />}
+    </>
   );
 };
 
