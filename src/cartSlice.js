@@ -15,8 +15,13 @@ const cartSlice = createSlice({
         state[action.payload].itemCount -= 1;
       }
     },
+    removeItem: (state, action) => {
+      if (action.payload !== -1) {
+        state.splice(action.payload, 1);
+      }
+    },
   },
 });
 
-export const { add, increment, decrement } = cartSlice.actions;
+export const { add, increment, decrement, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;

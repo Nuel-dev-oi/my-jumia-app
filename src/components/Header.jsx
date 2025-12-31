@@ -10,7 +10,7 @@ const HeaderContainer = styled.header`
   flex-direction: column;
   border: 2px solid #000;
   height: max-content;
-  width: 100%;
+  width: 101%;
 `;
 
 function Header({ logoName, style }) {

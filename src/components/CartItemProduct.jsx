@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import items from '../scripts';
 import { FiTrash2 } from 'react-icons/fi';
@@ -7,6 +7,7 @@ import Screen from './Screen';
 import { useDispatch } from 'react-redux';
 import { increment, decrement } from '../cartSlice.js';
 import { useSelector } from 'react-redux';
+import RemoveButton from './RemoveButton.jsx';
 
 const Div = styled.div`
   font-size: 1em;
@@ -76,11 +77,21 @@ const CartItemProduct = ({ product }) => {
   const [count, setCount] = useState(product.itemCount);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
+  const [remove, setRemove] = useState(false);
+  const indexRef = useRef();
   const itemIndex = () => {
     const index = cartItems.findIndex(
       (item) => item.productId === product.productId
     );
     return index;
+  };
+
+  const onRemove = (value) => {
+    setRemove(value);
+  };
+
+  const onSetRemove = (value) => {
+    setRemoved(value);
   };
 
   const handleIncrement = () => {
@@ -103,7 +114,7 @@ const CartItemProduct = ({ product }) => {
       currentProd && setCurrentItem(currentProd);
     };
     handleProduct();
-  }, [product]);
+  }, [product, cartItems]);
 
   return (
     <>
@@ -125,7 +136,7 @@ const CartItemProduct = ({ product }) => {
           <Span
             onClick={() => {
               setRemoved(true);
-              setTimeout(() => setRemoved(false), 5000);
+              indexRef.current = itemIndex();
             }}
           >
             <FiTrash2
@@ -275,7 +286,14 @@ const CartItemProduct = ({ product }) => {
           margin: '0px',
         }}
       />
-      {removed && <Screen screen={'removed'} />}
+      {removed && (
+        <RemoveButton
+          onRemove={onRemove}
+          onSetRemove={onSetRemove}
+          index={indexRef}
+        />
+      )}
+      {remove && <Screen screen={'removed'} />}
     </>
   );
 };

@@ -106,7 +106,7 @@ const CartButton = () => {
     function count() {
       const productId = pathname.substring(pathname.lastIndexOf('/') + 1);
       const cart = JSON.parse(localStorage.getItem('cartItems'));
-      const product = cart.find((item) => item.productId === productId);
+      const product = cart?.find((item) => item.productId === productId);
 
       if (product !== -1) {
         setCount(product?.itemCount || 1);

@@ -57,6 +57,7 @@ const CartButt = styled.div`
   position: relative;
   cursor: pointer;
   width: 100%;
+  font-size: 0.9em;
 
   &:hover {
     background-color: rgba(233, 104, 5, 1);
@@ -197,20 +198,33 @@ const CartItem = () => {
             width: '100%',
             borderRadius: '10px 10px 0 0',
             fontWeight: '200',
-            fontSize: '1em',
+            fontSize: '.9em',
             position: 'static',
           }}
         >
           CART SUMMARY
         </Para>
         <Subtotal>
-          <Span>Subtotal</Span>
-          <Span>
+          <Span
+            style={{
+              fontSize: '.9em',
+              paddingTop: '5px',
+            }}
+          >
+            Subtotal
+          </Span>
+          <Span
+            style={{
+              fontWeight: '400',
+            }}
+          >
             {'\u20a6'} {amount}
           </Span>
         </Subtotal>
         <CartDiv>
-          <CartButt>View Summary</CartButt>
+          <CartButt>
+            Checkout ({'\u20a6'} {amount})
+          </CartButt>
         </CartDiv>
       </Summary>
     </Div>
