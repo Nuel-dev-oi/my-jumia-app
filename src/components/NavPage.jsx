@@ -18,7 +18,7 @@ const Flex = styled.div`
   justify-content: space-evenly;
 `;
 
-const NavPage = () => {
+const NavPage = ({see}) => {
   const location = useLocation();
   const [title, setTitle] = useState();
 
@@ -84,6 +84,7 @@ const NavPage = () => {
           itemStyle={{
             fontSize: '16px',
           }}
+          see={see}
         />
       </div>
     </Flex>

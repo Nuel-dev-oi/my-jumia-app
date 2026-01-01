@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Styled from 'styled-components';
+import NavPage from './NavPage';
 
 const Div = Styled.div`
     font-size: 2rem;
   font-weight: bold;
   text-align: center;
   height: 100vh;
-  background-color: #fff;
+  background-color: #ebe8e8ff;
   grid-column-start: 2;
   grid-column-end: span 2;
 `;
@@ -24,7 +25,7 @@ const HolidaySales = () => {
     }
   }, [navigate, loggedIn]);
 
-  return <Div>This is the holiday Sales Page.</Div>;
+  return <Div><NavPage see={true}/></Div>;
 };
 
 export default HolidaySales;

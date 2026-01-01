@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { MdFavoriteBorder } from 'react-icons/md';
 import { MdFlashOn } from 'react-icons/md';
 import styled from 'styled-components';
@@ -171,6 +171,16 @@ const Product = () => {
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(true);
   const [position, setposition] = useState({ top: '0', pos: 'static' });
+
+  const navigate = useNavigate();
+  const [loggedIn, _] = useState(
+    JSON.parse(localStorage.getItem('loggedIn')) || false
+  );
+  useEffect(() => {
+    if (!loggedIn) {
+      navigate('/sign_in', { replace: true });
+    }
+  }, [navigate, loggedIn]);
 
   useEffect(() => {
     const handleScroll = () => {

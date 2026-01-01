@@ -4,7 +4,8 @@ import { MdList } from 'react-icons/md';
 import { FaRegHeart } from 'react-icons/fa';
 import { BsPerson } from 'react-icons/bs';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-
+import { removeAll } from '../cartSlice';
+import { useDispatch } from 'react-redux';
 const Account = styled.div`
   background-color: #fff;
   position: absolute;
@@ -100,6 +101,7 @@ function handleKeyboardScroll(e, scrollStep = 100) {
 }
 
 const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const [scroll, setScroll] = useState('165');
@@ -217,6 +219,7 @@ const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
           }}
           onClick={() => {
             localStorage.removeItem('loggedIn');
+            dispatch(removeAll());
             navigate('/holiday_sales');
           }}
         >

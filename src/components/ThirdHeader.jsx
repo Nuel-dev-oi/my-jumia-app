@@ -4,9 +4,10 @@ import logo from '../assets/jumia.svg?url';
 import MenuList from './MenuList';
 import FormSearch from './Form';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const icons = ['user', 'help', 'cart'];
-const data = ['Account', 'Help', 'Cart'];
+
 
 const Img = styled.img`
   width: 25px;
@@ -43,6 +44,8 @@ const HeadingOne = styled.h1`
 
 const ThirdHeader = ({ logoName }) => {
   const loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+  const users = useSelector((state) => state.users);
+  const [name, setName] = useState("Account");
 
   const [position, setPosition] = useState({
     position: 'static',
@@ -50,6 +53,19 @@ const ThirdHeader = ({ logoName }) => {
   });
 
   const [viewAcc, setViewAcc] = useState('none');
+
+  useEffect(() => {
+    console.log(users);
+    function setUserName() {
+      if (loggedIn) {
+        setName(`Hi, ${localStorage.getItem("username")}`);
+      } else {
+       setName("Account");
+      }
+    }
+
+    setUserName();
+  },[users, loggedIn]);
 
   useEffect(() => {
     $(() => {
@@ -107,7 +123,7 @@ const ThirdHeader = ({ logoName }) => {
           </Link>
         </HeadingOne>
         <FormSearch tag={true} />
-        {data.map((item, i) => {
+        {[name, 'Help', 'Cart'].map((item, i) => {
           if (!loggedIn && i == 2) {
             return;
           }
