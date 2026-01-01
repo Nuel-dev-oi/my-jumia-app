@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../assets/jumia.svg';
-import { addUser } from "../userSlice.js";
+import { addUser } from '../userSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Div = styled.div`
@@ -141,7 +141,7 @@ const SignIn = ({ appName }) => {
     if (secondRef.current.matches(':focus')) {
       setAbsolute({ top: '280px', color: 'orange', fontSize: '.4em' });
     }
-     if (thirdRef.current.matches(':focus')) {
+    if (thirdRef.current.matches(':focus')) {
       setPos({ top: '354px', color: 'orange', fontSize: '.4em' });
     }
   };
@@ -165,15 +165,15 @@ const SignIn = ({ appName }) => {
     const name = thirdRef.current.value || false;
 
     if (email && password) {
-      const userDetails = {name, password, email};
+      const userDetails = { name, password, email };
       localStorage.clear();
       localStorage.setItem('user', JSON.stringify({ email, password }));
       done = true;
       dispatch(addUser(userDetails));
       if (name) {
         const username = name;
-        localStorage.removeItem("username");
-        localStorage.setItem("username", username);
+        localStorage.removeItem('username');
+        localStorage.setItem('username', username);
       }
     }
 
@@ -246,7 +246,7 @@ const SignIn = ({ appName }) => {
       </InputDiv>
 
       <Submit type="submit" value="Continue" onClick={handleSubmit} />
-      
+
       <P>Need help? Visit our Help center or contact us on 57643.</P>
       <div
         style={{

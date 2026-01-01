@@ -25,7 +25,11 @@ const HolidaySales = () => {
     }
   }, [navigate, loggedIn]);
 
-  return <Div><NavPage see={true}/></Div>;
+  return (
+    <Div>
+      <NavPage see={true} />
+    </Div>
+  );
 };
 
 export default HolidaySales;

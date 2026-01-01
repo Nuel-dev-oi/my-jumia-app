@@ -18,7 +18,7 @@ const Flex = styled.div`
   justify-content: space-evenly;
 `;
 
-const NavPage = ({see}) => {
+const NavPage = ({ see }) => {
   const location = useLocation();
   const [title, setTitle] = useState();
 

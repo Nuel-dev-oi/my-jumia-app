@@ -19,6 +19,7 @@ import SignIn from '../components/SignIn.jsx';
 import HolidaySales from '../components/HolidaySale.jsx';
 import Cart from '../components/Cart.jsx';
 import Product from '../components/Product.jsx';
+import NotFound from '../components/NotFound.jsx';
 
 const Pages = () => {
   return (
@@ -44,6 +45,7 @@ const Pages = () => {
           <Route path="/holiday_sales" element={<HolidaySales />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </Router>

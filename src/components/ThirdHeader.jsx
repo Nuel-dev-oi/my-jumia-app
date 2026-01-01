@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 
 const icons = ['user', 'help', 'cart'];
 
-
 const Img = styled.img`
   width: 25px;
   height: 25px;
@@ -45,7 +44,7 @@ const HeadingOne = styled.h1`
 const ThirdHeader = ({ logoName }) => {
   const loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
   const users = useSelector((state) => state.users);
-  const [name, setName] = useState("Account");
+  const [name, setName] = useState('Account');
 
   const [position, setPosition] = useState({
     position: 'static',
@@ -58,14 +57,14 @@ const ThirdHeader = ({ logoName }) => {
     console.log(users);
     function setUserName() {
       if (loggedIn) {
-        setName(`Hi, ${localStorage.getItem("username")}`);
+        setName(`Hi, ${localStorage.getItem('username')}`);
       } else {
-       setName("Account");
+        setName('Account');
       }
     }
 
     setUserName();
-  },[users, loggedIn]);
+  }, [users, loggedIn]);
 
   useEffect(() => {
     $(() => {

@@ -26,6 +26,7 @@ import SignIn from './SignIn.jsx';
 import HolidaySales from './HolidaySale.jsx';
 import Cart from './Cart.jsx';
 import Product from './Product.jsx';
+import NotFound from './NotFound.jsx';
 
 const Main = styled.main`
   width: 100%;
@@ -117,6 +118,13 @@ const Layout = ({ children, logoName }) => {
 
   useEffect(() => {
     const handlePages = () => {
+      if (
+        location.pathname !== `/product/${productId}` &&
+        /\/product/.test(location.pathname)
+      ) {
+        setRender(() => <NotFound />);
+        return;
+      }
       if (location.pathname === '/holiday_sales') {
         setRender(() => <HolidaySales />);
         return;
@@ -139,8 +147,13 @@ const Layout = ({ children, logoName }) => {
         const regExp = new RegExp(`^/${item}$`);
         return regExp.test(url.pathname) === true;
       });
-      let i = strings.indexOf(index[0]);
-      setRender(Pages[i]);
+      if (index.length > 0) {
+        const i = strings.indexOf(index[0]);
+        setRender(Pages[i]);
+        return;
+      } else {
+        setRender(() => <NotFound />);
+      }
     };
     handlePages();
   }, [location.pathname, url, navigate, productId]);
