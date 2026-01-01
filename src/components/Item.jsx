@@ -79,7 +79,7 @@ const FloatDiv = styled.div`
   color: rgba(255, 155, 4, 1);
 `;
 
-const Item = ({ items, style, flag, progress }) => {
+const Item = ({ items, style, flag, progress, itemStyle }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const productId = useSelector((state) => state.productId);
@@ -132,7 +132,11 @@ const Item = ({ items, style, flag, progress }) => {
               {item?.item}
             </div>
 
-            <InnerDiv>
+            <InnerDiv
+              style={{
+                ...itemStyle,
+              }}
+            >
               <strong
                 style={{
                   fontSize: '0.9em',
@@ -171,7 +175,11 @@ const Item = ({ items, style, flag, progress }) => {
               ) : null}
             </InnerDiv>
             {flag ? (
-              <FloatDiv>
+              <FloatDiv
+                style={{
+                  ...itemStyle,
+                }}
+              >
                 {flag ? (
                   <item.discount
                     formerPrice={item?.formerPrice}

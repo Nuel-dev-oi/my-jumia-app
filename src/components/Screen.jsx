@@ -12,7 +12,7 @@ const Div = styled.div`
   height: 40px;
   font-size: 1.1em;
   font-weight: 400;
-  z-index: 2000000;
+  z-index: 7000000000000;
   display: flex;
   justify-content: center;
   align-items: center;

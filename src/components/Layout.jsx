@@ -83,7 +83,6 @@ const Layout = ({ children, logoName }) => {
   const location = useLocation();
   const productId = JSON.parse(localStorage.getItem('productId'));
   const url = useMemo(() => new RegExp(`${productId}`), [productId]);
-  const url0 = location.pathname;
   const [isSmall, setIsSmall] = useState(true);
   const [_, setWidth] = useState(window.innerWidth);
   const [signIn, setSignIn] = useState(false);
@@ -127,8 +126,9 @@ const Layout = ({ children, logoName }) => {
         return;
       }
       if (
-        (url.test(location.pathname) && location.pathname !== '/cart') ||
-        (url0 === location.pathname && /\/product/.test(location.pathname))
+        url.test(location.pathname) &&
+        location.pathname !== '/cart' &&
+        /\/product/.test(location.pathname)
       ) {
         setRender(() => <Product />);
         return;
@@ -143,7 +143,7 @@ const Layout = ({ children, logoName }) => {
       setRender(Pages[i]);
     };
     handlePages();
-  }, [location.pathname, url, navigate, productId, url0]);
+  }, [location.pathname, url, navigate, productId]);
 
   useEffect(() => {
     const handleSignIn = () => {

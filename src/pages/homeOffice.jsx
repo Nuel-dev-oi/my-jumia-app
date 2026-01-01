@@ -1,18 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import NavPage from '../components/NavPage';
 
 const Div = styled.div`
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
   height: 100vh;
-  background-color: #fff;
+  background-color: #ebe8e8ff;
   grid-column-start: 2;
   grid-column-end: span 2;
 `;
 
 const Office = () => {
-  return <Div>This is the Home and Office page</Div>;
+  return (
+    <Div>
+      <NavPage />
+    </Div>
+  );
 };
 
 export default Office;

@@ -155,6 +155,7 @@ const Home = () => {
         products={products}
         name="Flash Sales"
         progress={true}
+        see={true}
       />
 
       <TransparentDiv />
@@ -177,6 +178,7 @@ const Home = () => {
         style={{
           backgroundColor: 'orangered',
         }}
+        see={true}
       />
 
       <TransparentDiv />

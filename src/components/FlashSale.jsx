@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import flash from '../assets/flash-sale.svg';
 import Item from './Item.jsx';
+import { Link } from 'react-router-dom';
 
 const Div = styled.div`
   font-size: 1.1rem;
@@ -23,7 +24,16 @@ const FlexItem = styled.div`
   cursor: pointer;
 `;
 
-const FlashSale = ({ timer, products, name, style, progress, color, see }) => {
+const FlashSale = ({
+  timer,
+  products,
+  name,
+  style,
+  progress,
+  color,
+  see,
+  itemStyle,
+}) => {
   const [second, setSecond] = useState(timer?.second);
   const [minute, setMinute] = useState(timer?.minute);
   const [hour, setHour] = useState(timer?.hour);
@@ -87,10 +97,26 @@ const FlashSale = ({ timer, products, name, style, progress, color, see }) => {
             fontSize: '.9em',
           }}
         >
-          {!see ? 'See All' : null} {!see ? '\u203A' : null}
+          {!see ? (
+            <Link
+              to="/"
+              style={{
+                color: '#000',
+                textDecoration: 'none',
+              }}
+            >
+              See All
+            </Link>
+          ) : null}{' '}
+          {!see ? '\u203A' : null}
         </FlexItem>
       </Div>
-      <Item items={products} flag={true} progress={progress} />
+      <Item
+        items={products}
+        flag={true}
+        progress={progress}
+        itemStyle={itemStyle}
+      />
     </>
   );
 };
