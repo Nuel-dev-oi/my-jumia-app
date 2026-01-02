@@ -54,7 +54,6 @@ const ThirdHeader = ({ logoName }) => {
   const [viewAcc, setViewAcc] = useState('none');
 
   useEffect(() => {
-    console.log(users);
     function setUserName() {
       if (loggedIn) {
         setName(`Hi, ${localStorage.getItem('username')}`);

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import notfouund from '../assets/404.png';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Div = styled.div`
   font-size: 1.5rem;
@@ -19,8 +19,20 @@ const Div = styled.div`
 `;
 
 const NotFound = () => {
+  const location = useLocation();
+  const [see, setSee] = useState('block');
+  useEffect(() => {
+    function setSeen() {
+      if (location.pathname === '/sign_in') setSee('none');
+    }
+    setSeen();
+  }, [location.pathname]);
   return (
-    <Div>
+    <Div
+      style={{
+        display: `${see}`,
+      }}
+    >
       Sorry, Page Not Found!!
       <p
         style={{

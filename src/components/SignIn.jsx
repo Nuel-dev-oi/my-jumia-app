@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../assets/jumia.svg';
 import { addUser } from '../userSlice.js';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const Div = styled.div`
   width: 101%;
@@ -99,7 +99,6 @@ const PasswordDiv = styled.div`
 const SignIn = ({ appName }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const users = useSelector((state) => state.users);
 
   const [position, setPosition] = useState({
     top: '223px',
@@ -125,10 +124,6 @@ const SignIn = ({ appName }) => {
   const ref = useRef();
   const secondRef = useRef();
   const thirdRef = useRef();
-
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
 
   useEffect(() => {
     if (loggedIn) navigate('/');
