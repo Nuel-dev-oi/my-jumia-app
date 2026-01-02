@@ -44,6 +44,7 @@ const PicDiv = styled.div`
   background-size: cover;
   background-position: 100% 0%;
   background-blend-mode: normal;
+  background-image: ${adImage};
 `;
 
 const InnerSpan = styled.span`
@@ -70,7 +71,6 @@ const Img = styled.img`
 const FixedDiv = styled.div`
   width: 20%;
   height: 10%;
-  background-image: ${adImage};
   position: absolute;
   bottom: 0px;
   left: 35%;

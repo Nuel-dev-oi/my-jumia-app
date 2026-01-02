@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import CartItemProduct from './CartItemProduct.jsx';
 import items from '../scripts';
+import Order from './Order.jsx';
 
 const Div = styled.div`
   display: flex;
@@ -111,10 +112,15 @@ function convertStrToNum(str) {
 }
 
 const CartItem = () => {
+  const [order, setOrder] = useState(false);
   const cartStorage = useSelector((state) => state.cart);
   const cartRef = useRef();
   const [amount, setAmount] = useState();
   const [position, setposition] = useState({ top: '0', pos: 'static' });
+
+  const onSetOrder = (value) => {
+    setOrder(value);
+  };
 
   useEffect(() => {
     const handleCartSummary = () => {
@@ -168,66 +174,73 @@ const CartItem = () => {
   }, []);
 
   return (
-    <Div ref={cartRef}>
-      <InnerDiv>
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            flex: '1 0 auto',
-          }}
-        >
-          <Para>Cart ({cartStorage.length})</Para>
-          {cartStorage.map((item, i) => (
-            <CartItemProduct key={i} product={item} referrer={cartRef} />
-          ))}
-        </div>
-      </InnerDiv>
-      <Summary
-        style={{
-          top: `${position.top}`,
-          position: `${position.pos}`,
-          right: `${position.right}`,
-          width: `${position.width}`,
-        }}
-      >
-        <Para
-          style={{
-            width: '100%',
-            borderRadius: '10px 10px 0 0',
-            fontWeight: '200',
-            fontSize: '.9em',
-            position: 'static',
-          }}
-        >
-          CART SUMMARY
-        </Para>
-        <Subtotal>
-          <Span
+    <>
+      {order && <Order onSetOrder={onSetOrder} />}
+      <Div ref={cartRef}>
+        <InnerDiv>
+          <div
             style={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              flex: '1 0 auto',
+            }}
+          >
+            <Para>Cart ({cartStorage.length})</Para>
+            {cartStorage.map((item, i) => (
+              <CartItemProduct key={i} product={item} referrer={cartRef} />
+            ))}
+          </div>
+        </InnerDiv>
+        <Summary
+          style={{
+            top: `${position.top}`,
+            position: `${position.pos}`,
+            right: `${position.right}`,
+            width: `${position.width}`,
+          }}
+        >
+          <Para
+            style={{
+              width: '100%',
+              borderRadius: '10px 10px 0 0',
+              fontWeight: '200',
               fontSize: '.9em',
-              paddingTop: '5px',
+              position: 'static',
             }}
           >
-            Subtotal
-          </Span>
-          <Span
-            style={{
-              fontWeight: '400',
-            }}
-          >
-            {'\u20a6'} {amount}
-          </Span>
-        </Subtotal>
-        <CartDiv>
-          <CartButt>
-            Checkout ({'\u20a6'} {amount})
-          </CartButt>
-        </CartDiv>
-      </Summary>
-    </Div>
+            CART SUMMARY
+          </Para>
+          <Subtotal>
+            <Span
+              style={{
+                fontSize: '.9em',
+                paddingTop: '5px',
+              }}
+            >
+              Subtotal
+            </Span>
+            <Span
+              style={{
+                fontWeight: '400',
+              }}
+            >
+              {'\u20a6'} {amount}
+            </Span>
+          </Subtotal>
+          <CartDiv>
+            <CartButt
+              onClick={() => {
+                onSetOrder(true);
+              }}
+            >
+              Checkout ({'\u20a6'} {amount})
+            </CartButt>
+          </CartDiv>
+        </Summary>
+      </Div>
+    </>
   );
 };
 
