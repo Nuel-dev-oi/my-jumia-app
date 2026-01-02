@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import adImage from '../assets/ads_img.png';
 import logo from '../assets/jumia-white.svg';
 import SpanButton from './SpanButton.jsx';
+import img_1 from '../assets/img_1.png';
+import img_2 from '../assets/img_2.png';
+import img_3 from '../assets/img_3.png';
+import img_4 from '../assets/img_4.png';
+import img_5 from '../assets/img_5.png';
+
+const IMAGES = [adImage, img_1, img_2, img_3, img_4, img_5];
 
 const rotateZ = keyframes`
   from {
@@ -21,17 +28,22 @@ const Div = styled.div`
   grid-row-end: 4;
   grid-column-start: 2;
   grid-column-end: span 1;
-  background-image: url(${adImage});
-  background-repeat: no-repeat;
-  background-size: 65% 97%;
-  background-position: 100% 0%;
-  background-blend-mode: normal;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   padding-top: 40px;
   position: relative;
+  transition: opacity 0.6s ease-in-out;
+  opacity: 1;
+`;
+
+const PicDiv = styled.div`
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 100% 0%;
+  background-blend-mode: normal;
 `;
 
 const InnerSpan = styled.span`
@@ -58,7 +70,7 @@ const Img = styled.img`
 const FixedDiv = styled.div`
   width: 20%;
   height: 10%;
-
+  background-image: ${adImage};
   position: absolute;
   bottom: 0px;
   left: 35%;
@@ -82,6 +94,70 @@ const FixedDiv = styled.div`
 `;
 
 const MainAds = () => {
+  const number = useRef(0);
+  const ref = useRef(null);
+  const interval = useRef(null);
+  const [num, setNum] = React.useState(null);
+  const [i, setI] = React.useState(null);
+  const onSetNum = (n) => {
+    setNum(n);
+  };
+
+  useEffect(() => {
+    function handleSlideShow() {
+      const el = ref.current;
+      if (!el) return;
+
+      if (num !== null) {
+        number.current = num;
+        el.style.backgroundImage = `url(${IMAGES[num]})`;
+
+        if (interval.current) {
+          clearInterval(interval.current);
+          interval.current = null;
+        }
+
+        setNum(null);
+
+        interval.current = setInterval(() => {
+          el.style.opacity = 0.9;
+
+          setTimeout(() => {
+            el.style.backgroundImage = `url(${IMAGES[number.current]})`;
+
+            number.current =
+              number.current >= IMAGES.length - 1 ? 0 : number.current + 1;
+            el.style.opacity = 1;
+          }, 600);
+        }, 2500);
+
+        return () => clearInterval(interval.current);
+      }
+
+      interval.current = setInterval(() => {
+        el.style.opacity = 0.9;
+
+        setTimeout(() => {
+          el.style.backgroundImage = `url(${IMAGES[number.current]})`;
+          setI(number.current);
+          number.current =
+            number.current >= IMAGES.length - 1 ? 0 : number.current + 1;
+
+          el.style.opacity = 1;
+        }, 600);
+      }, 2500);
+    }
+
+    handleSlideShow();
+
+    return () => {
+      if (interval.current) {
+        clearInterval(interval.current);
+        interval.current = null;
+      }
+    };
+  }, [num]);
+
   return (
     <Div>
       <InnerSpan
@@ -166,9 +242,18 @@ const MainAds = () => {
       >
         {`T&Cs Apply`}
       </span>
-
+      <PicDiv
+        style={{
+          position: 'absolute',
+          width: '445px',
+          height: '99%',
+          top: '0%',
+          left: '35%',
+        }}
+        ref={ref}
+      ></PicDiv>
       <FixedDiv>
-        <SpanButton />
+        <SpanButton onsetNum={onSetNum} number={i} />
       </FixedDiv>
     </Div>
   );

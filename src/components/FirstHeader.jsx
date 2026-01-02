@@ -115,7 +115,6 @@ const FirstHeader = ({ logoName }) => {
       scaleBibTime.current += SCALE_SPEED;
 
       const scaleBib = 1 + Math.sin(scaleBibTime.current) * SCALE_AMOUNT;
-      console.log(scaleBib);
       box_bib.style.transform = `scale(${scaleBib})`;
 
       // ---- COLOR ANIMATION ----
