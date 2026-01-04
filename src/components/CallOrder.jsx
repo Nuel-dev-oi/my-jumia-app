@@ -14,6 +14,14 @@ const Div = styled.div`
   flex-direction: column;
   justify-content: space-around;
   padding: 10px;
+
+   @media(max-width: 700px) {
+     flex-direction: row;
+     background-color: orange;
+     gap: 10px;
+     background-color: orangered;
+     color: #fff;
+   }
 `;
 
 const Span = styled.span`
@@ -27,6 +35,11 @@ const InnerSpan = styled.span`
   flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
+
+   @media(max-width: 700px) {
+   font-size: .85em;
+
+  }
 `;
 
 const IconSpan = styled.span`
@@ -38,6 +51,11 @@ const IconSpan = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media(max-width: 700px) {
+    border: 1px solid orange;
+
+  }
 `;
 
 const CallOrder = () => {

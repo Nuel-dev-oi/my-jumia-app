@@ -153,6 +153,22 @@ const SignIn = ({ appName }) => {
     }
   };
 
+  const handleClick_1 = () => {
+    setPosition({ top: '205px', color: 'orange', fontSize: '.4em' });
+    ref.current.focus();
+  }
+
+  const handleClick_2 = () => {
+    setAbsolute({ top: '280px', color: 'orange', fontSize: '.4em' });
+    secondRef.current.focus();
+  }
+
+  const handleClick_3 = () => {
+    setPos({ top: '354px', color: 'orange', fontSize: '.4em' });
+    thirdRef.current.focus();
+  }
+  
+
   const handleSubmit = () => {
     let done = null;
     const email = ref.current.value || false;
@@ -199,6 +215,7 @@ const SignIn = ({ appName }) => {
           color: `${position.color}`,
           fontSize: `${position.fontSize}`,
         }}
+        onClick={() => handleClick_1()}
       >
         Enter your Email*
       </InputDiv>
@@ -218,6 +235,7 @@ const SignIn = ({ appName }) => {
           color: `${absolute.color}`,
           fontSize: `${absolute.fontSize}`,
         }}
+        onClick={() => handleClick_2()}
       >
         Enter your Password*
       </PasswordDiv>
@@ -236,6 +254,7 @@ const SignIn = ({ appName }) => {
           color: `${pos.color}`,
           fontSize: `${pos.fontSize}`,
         }}
+        onClick={() => handleClick_3()}
       >
         Enter your First Name*
       </InputDiv>

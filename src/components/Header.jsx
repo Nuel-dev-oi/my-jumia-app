@@ -8,20 +8,18 @@ import AltThirdHeader from './AltThirdHeader';
 const HeaderContainer = styled.header`
   display: flex;
   flex-direction: column;
-  border: 2px solid #000;
   height: max-content;
   width: 101%;
 `;
 
 function Header({ logoName, style }) {
   const [isSmall, setIsSmall] = useState(false);
-  const [_, setWidth] = useState(window.innerWidth);
+
 
   useLayoutEffect(() => {
     const handleResize = () => {
       const w = window.innerWidth;
       setIsSmall(w <= 700);
-      setWidth(w);
     };
 
     // Run immediately on mount

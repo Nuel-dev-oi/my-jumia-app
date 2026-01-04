@@ -28,7 +28,6 @@ const Div = styled.div`
   grid-row-end: 4;
   grid-column-start: 2;
   grid-column-end: span 1;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -37,6 +36,11 @@ const Div = styled.div`
   position: relative;
   transition: opacity 0.6s ease-in-out;
   opacity: 1;
+
+  @media(max-width: 700px) {
+    width: 100%
+
+  }
 `;
 
 const PicDiv = styled.div`
@@ -45,6 +49,16 @@ const PicDiv = styled.div`
   background-position: 100% 0%;
   background-blend-mode: normal;
   background-image: ${adImage};
+  top: 0%;
+  left: 35%;
+  width: 445px;
+
+  @media(max-width: 700px) {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-size: 100%;
+  }
 `;
 
 const InnerSpan = styled.span`
@@ -56,6 +70,11 @@ const InnerSpan = styled.span`
   white-space: nowrap;
   line-height: 0.8;
   margin-top: 5%;
+
+  @media(max-width: 700px) {
+    display: none;
+  }
+
 `;
 
 const Img = styled.img`
@@ -90,6 +109,11 @@ const FixedDiv = styled.div`
 
   .orange {
     background-color: orange;
+  }
+`;
+const Span = styled.span`
+  @media(max-width: 700px) {
+    display: none;
   }
 `;
 
@@ -171,7 +195,7 @@ const MainAds = () => {
         H<Img src={logo} alt="logo" />
         LIDAY
         <br />
-        <span
+        <Span
           style={{
             display: 'inline-block',
             marginTop: '-40px',
@@ -181,9 +205,9 @@ const MainAds = () => {
           }}
         >
           SALE
-        </span>
+        </Span>
       </InnerSpan>
-      <span
+      <Span
         style={{
           margin: '20px',
           color: '#fff',
@@ -194,8 +218,10 @@ const MainAds = () => {
         }}
       >
         02-28 DEC
-      </span>
-      <span
+      </Span>
+      {
+        window.innerWidth <= 700 ? null :
+      <Span
         style={{
           display: 'inline-block',
           width: '30%',
@@ -207,7 +233,7 @@ const MainAds = () => {
           fontSize: '.8rem',
         }}
       >
-        <span
+        <Span
           style={{
             display: 'flex',
             borderRadius: '9px',
@@ -219,8 +245,8 @@ const MainAds = () => {
             alignItems: 'center',
           }}
         >
-          {'up to '.toUpperCase()}
-          <strong
+          {window.innerWidth <= 700 ? null :'up to '.toUpperCase()}
+          <Span
             style={{
               fontSize: '1.8rem',
               lineHeight: '.8',
@@ -228,10 +254,11 @@ const MainAds = () => {
             }}
           >
             65% off
-          </strong>
-        </span>
-      </span>
-      <span
+          </Span>
+        </Span>
+      </Span> 
+      }
+      <Span
         style={{
           margin: '20px',
           color: '#fff',
@@ -241,14 +268,11 @@ const MainAds = () => {
         }}
       >
         {`T&Cs Apply`}
-      </span>
+      </Span>
       <PicDiv
         style={{
           position: 'absolute',
-          width: '445px',
           height: '99%',
-          top: '0%',
-          left: '35%',
         }}
         ref={ref}
       ></PicDiv>

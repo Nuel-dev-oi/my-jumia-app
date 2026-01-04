@@ -10,13 +10,22 @@ const Li = styled.li`
   font-weight: 100;
   font-family: 'Gruppo', san-serif;
   white-space: nowrap;
+  color: #000;
 
   a {
-    color: #444444;
+    color: #000;
     text-decoration: none;
+
+    @media(max-width: 700px) {
+      color: #000;
+
+    }
 
     &:hover {
       color: #ff6600;
+      @media(max-width: 700px) {
+        color: red
+      }
     }
   }
 `;

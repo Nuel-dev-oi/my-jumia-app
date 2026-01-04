@@ -4,6 +4,9 @@ import { FaBars } from 'react-icons/fa';
 import logo from '../assets/jumia.svg';
 import { FaUser, FaShoppingCart } from 'react-icons/fa';
 import FormSearch from './Form';
+import Navigation from "./min_component/Navigation.jsx";
+import { Link } from 'react-router-dom';
+import AccountMenu from './AccountMenu.jsx';
 
 const Div = styled.div`
   display: flex;
@@ -11,11 +14,13 @@ const Div = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-
   padding-bottom: 10px;
   box-shadow: 0px 0px 2px 1px rgb(200, 200, 200);
   background-color: #fff;
-  z-index: 10;
+  z-index: 400;
+  a {
+    text-decoration: none;
+  }
 `;
 
 const Span = styled.span`
@@ -40,12 +45,26 @@ const User = styled.span`
 `;
 
 function AltThirdHeader({ logoName }) {
+  const [view, setView] = useState(false);
+  const [viewAcc, setViewAcc] = useState('none');
   const [position, setPosition] = useState({
     position: 'static',
     top: '0',
   });
 
+  const [loggedIn, setLoggedIn] = useState(
+      JSON.parse(localStorage.getItem('loggedIn'))
+    );
+
+  const onSetView = (value) => {
+    setView(value);
+  }
+
   const [size, setSize] = useState(window.innerWidth);
+
+  const handleClick = () => {
+    viewAcc == 'none' ? setViewAcc('flex') : setViewAcc('none');
+  };
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -69,62 +88,88 @@ function AltThirdHeader({ logoName }) {
   });
 
   return (
-    <Div
-      style={{
-        position: position?.position,
-        top: position?.top,
-        display: 'flex',
-        width: `${size - 20}px`,
-      }}
-    >
-      <FaBars
+    <>
+      <Div
         style={{
-          margin: '15px',
-        }}
-      />
-      <Span
-        style={{
-          marginRight: 'auto',
+          position: position?.position,
+          top: position?.top,
+          display: 'flex',
+          width: `${size}px`,
         }}
       >
-        {logoName.toUpperCase()}
-        <Img src={logo} type="image/svg+xml" alt={`${logoName} logo`} />
-      </Span>
-
-      <Span>
-        <User>
-          <FaUser
+        <FaBars
+          style={{
+            margin: '15px',
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            view === true ? setView(false) : setView(true);
+            
+           view === true ? document.body.style.overflow = "scroll" 
+              : document.body.style.overflow = "hidden";
+          }}
+        />
+        <Span
+          style={{
+            marginRight: 'auto',
+          }}
+        >
+          <Link
+            to="/"
             style={{
-              marginRight: '30px',
-              cursor: 'pointer',
+              color: '#000',
             }}
-          />
-        </User>
+          >
+            {logoName.toUpperCase()}
+            <Img src={logo} type="image/svg+xml" alt={`${logoName} logo`} />
+          </Link>
+        </Span>
 
-        <User>
-          <FaShoppingCart
-            style={{
-              marginRight: '30px',
-              cursor: 'pointer',
-            }}
-          />
-        </User>
-      </Span>
-      <FormSearch
-        style={{
-          borderRadius: ' 0 25px 25px 0',
-          width: '150%',
-        }}
-        search={{
-          borderRadius: '25px 0 0 25px',
-          marginLeft: '-30%',
-          width: '20%',
-          fontSize: '45em',
-          flex: '0 1 auto',
-          padding: '10px',
-        }}
+        <Span>
+          <User>
+            <FaUser
+              style={{
+                marginRight: '30px',
+                cursor: 'pointer',
+              }}
+              onClick={handleClick}
+            />
+          </User>
+
+          <User>
+            <FaShoppingCart
+              style={{
+                marginRight: '30px',
+                cursor: 'pointer',
+              }}
+            />
+          </User>
+        </Span>
+        <FormSearch
+          style={{
+            borderRadius: ' 0 25px 25px 0',
+            width: '150%',
+          }}
+          search={{
+            borderRadius: '25px 0 0 25px',
+            marginLeft: '-30%',
+            width: '20%',
+            fontSize: '45em',
+            flex: '0 1 auto',
+            padding: '10px',
+          }}
+        />
+      </Div>
+      {
+        view &&
+      <Navigation onSetView={onSetView} />
+      }
+      <AccountMenu
+        viewAcc={viewAcc}
+         loggedIn={loggedIn}
+        setLoggedIn={setLoggedIn}
       />
-    </Div>
+    </>
   );
 }
 

@@ -9,6 +9,10 @@ const OuterDiv = styled.div`
   align-content: space-between;
   justify-content: center;
   flex: 0 0 auto;
+  
+  @media(max-width: 700px) {
+    flex: 1 0 150px;
+  }
 `;
 
 const InnerDiv = styled.div`

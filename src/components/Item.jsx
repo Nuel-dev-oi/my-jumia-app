@@ -11,18 +11,21 @@ const FlexDiv = styled.div`
   height: 280px;
   flex-direction: row;
   padding-inline: 5px;
+  margin-bottom: 15px;
+  @media(max-width: 700px) {
+   overflow: hidden; 
+   overflow-x: scroll;
+  }
 `;
 
 const Img = styled.img`
   width: 100%;
   height: 65%;
-  /* border: 1px solid pink;*/
 `;
 
 const FlexItem = styled.div`
   width: calc(100% / 6);
   height: 280px;
-  /*border: 1px solid blue;*/
   padding: 5px;
   display: flex;
   flex-direction: column;
@@ -30,6 +33,13 @@ const FlexItem = styled.div`
   align-content: center;
   position: relative;
   transition: transform 0.5s linear;
+   
+  @media(max-width: 700px) {
+    flex: 1 0 180px;
+    margin-bottom: 15px;
+
+
+  }
 
   &:hover {
     box-shadow: 0px -1px 10px 1px #c2babaff;

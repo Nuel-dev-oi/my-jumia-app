@@ -43,6 +43,11 @@ const OuterDiv = styled.div`
   align-content: flex-start;
   box-shadow: inset 0px 0px 7px 1px #d0cbcbff;
   position: relative;
+  
+  @media(max-width: 700px) {
+    overflow-x: scroll;
+    margin-block: 15px;
+  }
 `;
 
 const Img = styled.img`
@@ -61,7 +66,6 @@ const ParentFlexDiv = styled.div`
   width: 92%;
   flex: 0 0 auto;
   display: flex;
-  box-shadow: inset 0px 0px 17px 2px #dbd7d7ff;
   position: relative;
 `;
 
@@ -83,7 +87,6 @@ const Home = () => {
   useEffect(() => {
     const element = ref.current.firstChild.nextSibling.firstChild;
     const lastElem = ref.current.firstChild.nextSibling.lastChild;
-    //console.log(lastElem.getBoundingClientRect().right);
     const handleLeft = () => {
       const left = element.getBoundingClientRect().left;
       setleftX(left);
@@ -164,8 +167,8 @@ const Home = () => {
         items={itemList}
         flag={false}
         style={{
-          height: `${280 * 2}px`,
-          flexWrap: 'wrap',
+          height: `${window.innerWidth <= 700 ? "280px":  `${280 * 2}px`}`,
+          flexWrap: `${window.innerWidth <= 700 ? "nowrap" : "wrap"}`,
           justifyContent: 'space-around',
         }}
       />

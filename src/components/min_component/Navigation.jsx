@@ -1,29 +1,29 @@
-import React from 'react';
-import styled from 'styled-components';
-import data, { iconList } from '../scripts/navList.jsx';
-import List from './List.jsx';
+import React from "react";
+import styled from "styled-components";
+import data, { iconList } from '../../scripts/navList.jsx';
+import List from '../List.jsx';
+import { FaTimes } from "react-icons/fa";
 
 const Nav = styled.nav`
-  width: 100%;
-  height: 65vh;
+  width: 95%;
+  height: 100vh;
   background-color: #fff;
   padding: 0px;
   display: flex;
   align-items: flex-start;
-  color: #000;
-  @media (max-width: 700px) {
-    display: none;
-  }
+  position: fixed;
+  z-index: 500;
+  top: 0px;
 `;
 
-const Navigation = ({ style }) => {
+const Navigation = ({ style, onSetView }) => {
   
   return (
     <Nav
       style={{
         ...style,
         borderRadius: '5px',
-        boxShadow: '0px 0px 7px 1px orange',
+      
       }}
     >
       <ul
@@ -48,6 +48,18 @@ const Navigation = ({ style }) => {
           );
         })}
       </ul>
+      <FaTimes
+        size={25}
+        style={{
+            cursor: "pointer",
+            color: "#000",
+
+        }}
+        onClick={() => {
+            onSetView(false);
+            document.body.style.overflow = "scroll";
+        }}
+      />
       </Nav>
   );
 };

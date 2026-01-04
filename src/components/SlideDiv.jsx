@@ -22,7 +22,6 @@ const InnerDiv = styled.div`
 
 const OuterDiv = styled.div`
   width: 4%;
-  /*border: 2px solid blue;*/
   display: flex;
   flex: 1 0 auto;
   justify-content: center;
@@ -33,6 +32,10 @@ const OuterDiv = styled.div`
   z-index: 100;
   position: relative;
   background-color: #fff;
+
+  @media(max-width: 700px) {
+    display: none;
+  }
 `;
 
 const SlideDiv = ({ style, width, edge, leftX, rightX }) => {

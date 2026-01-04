@@ -36,7 +36,7 @@ const Main = styled.main`
 
 const Div = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 const LayoutGrid = styled.div`
@@ -89,6 +89,10 @@ const Layout = ({ children, logoName }) => {
   const [signIn, setSignIn] = useState(false);
   const [render, setRender] = useState();
 
+  useEffect(() => {
+    window.innerWidth <= 700 ? document.body.style.overflow = "hidden scroll" : document.body.style.overflowX = "scroll scroll";
+  }, []);
+
   const displayLayout =
     location.pathname === '/' || location.pathname === '/about';
 
@@ -102,6 +106,7 @@ const Layout = ({ children, logoName }) => {
       }
 
       setWidth(w);
+      window.innerWidth <= 700 ? document.body.style.overflow = "hidden scroll" : document.body.style.overflowX = "scroll scroll";
     };
 
     // Run immediately
@@ -168,12 +173,22 @@ const Layout = ({ children, logoName }) => {
 
   return isSmall ? (
     <>
-      <Header logoName={'Jumia'} />
+    {
+      !signIn ?
+      <Header logoName={'Jumia'} /> : <SignIn appName="Jumia"/>
+    }
+    {displayLayout ? (
       <Div>
-        <Navigation />
+        <MainAds />
+        <CallOrder />
         <Main>{children}</Main>
       </Div>
-      <Footer />
+      ) : render
+    }
+    {
+      !signIn ?
+      <Footer logoName="Jumia" /> : null
+    }
     </>
   ) : (
     <LayoutGrid>
