@@ -14,7 +14,7 @@ const HeaderSpan = styled.span`
   margin-right: 15px;
   box-shadow: 0px 0px 10px 1px gray;
   margin: 15px;
-  padding: 10px;
+  padding: 8px;
   position: relative;
 
   &:hover {

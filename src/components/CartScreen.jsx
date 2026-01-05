@@ -20,6 +20,13 @@ const Div = styled.div`
   padding: 5px;
   overflow: hidden;
   font-weight: 600;
+
+  @media(max-width: 700px) {
+    right: 25px;
+    position: absolute;
+    top: -15px
+
+  }
 `;
 
 const CartScreen = () => {

@@ -20,6 +20,7 @@ export default createGlobalStyle`
         line-height: 1.4;
         height: max-content;
         text-shadow: 0px 0px 1px #000;
+        overflow-x: ${() => window.innerWidth <= 700 ? "hidden" : "scroll"};
     }
     a:link, a:visited {
         color: #0077cc;

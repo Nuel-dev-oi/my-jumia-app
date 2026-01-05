@@ -68,7 +68,7 @@ const Span = styled.span`
   font-size: 1em;
 `;
 
-const CartButton = () => {
+const CartButton = ({style}) => {
   const cartRef = useRef();
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -173,7 +173,11 @@ const CartButton = () => {
 
   return (
     <>
-      <CartDiv ref={cartRef}>
+      <CartDiv ref={cartRef}
+        style={{
+          ...style,
+        }}
+      >
         {!choose ? (
           <CartButt>
             <MdOutlineShoppingCart

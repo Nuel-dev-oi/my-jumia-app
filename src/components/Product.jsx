@@ -27,6 +27,11 @@ const Div = styled.div`
   grid-column-start: 2;
   grid-column-end: span 2;
   position: relative;
+
+  @media(max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const Main = styled.main`
@@ -37,6 +42,12 @@ const Main = styled.main`
   width: 100%;
   display: flex;
   height: 725px;
+
+  @media(max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+  }
 `;
 
 const Detail = styled.article`
@@ -78,6 +89,10 @@ const Mini = styled.article`
   flex-direction: column;
   row-gap: 20px;
   padding: 2px;
+
+  @media(max-width: 700px) {
+    display: none;
+  }
 `;
 
 const Seller = styled.article`
@@ -170,12 +185,45 @@ const Product = () => {
   const [product, setProduct] = useState();
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(true);
-  const [position, setposition] = useState({ top: '0', pos: 'static' });
-
+  const [position, setPosition] = useState({ top: '0', pos: 'fixed' });
   const navigate = useNavigate();
   const [loggedIn, _] = useState(
     JSON.parse(localStorage.getItem('loggedIn')) || false
   );
+
+  const [pos, setPos] = useState({ top: '500px', pos: 'static'});
+  const cartRef = useRef();
+
+   useEffect(() => {
+       const pathname = location.pathname;
+       console.log(pathname.includes("product/"))
+       const handleScroll = () => {
+         const rect = cartRef.current.getBoundingClientRect();
+         let isScrolling = true;
+         if (isScrolling) {
+           console.log(rect);
+    
+            if (rect.y < 60 && rect.y >= -1100) {
+             setPos({
+               pos: "fixed",
+               top: "80%",
+               left: `5px`,
+             })
+           } else {
+            setPos({
+             pos: "absolute",
+             top: "1280px",
+             left: `5px`,
+           })
+           }
+         }
+         isScrolling = false;
+       }
+       window.innerWidth <= 700 && pathname.includes("product/") ? window.addEventListener('scroll', handleScroll) : null;
+   
+       return () => window.removeEventListener('scroll', handleScroll);
+     }, [location.pathname]);
+
   useEffect(() => {
     if (!loggedIn) {
       navigate('/sign_in', { replace: true });
@@ -188,18 +236,18 @@ const Product = () => {
       let isScrolling = true;
       if (isScrolling) {
         if (rect.y <= 85) {
-          setposition({
+          setPosition({
             pos: 'fixed',
             top: '90px',
             right: '67px',
             width: '275px',
           });
         } else {
-          setposition({ pos: 'static', width: '' });
+          setPosition({ pos: 'static', width: '' });
         }
 
         if (rect.y <= -280) {
-          setposition({
+          setPosition({
             pos: 'absolute',
             top: `385px`,
             right: '0px',
@@ -209,7 +257,8 @@ const Product = () => {
       }
       isScrolling = false;
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.innerWidth > 700 ? window.addEventListener('scroll', handleScroll) : null;
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -261,7 +310,7 @@ const Product = () => {
 
   return (
     <Div>
-      <Main>
+      <Main ref={cartRef}>
         <Img src={product?.picture} alt="product Image" />
         <InnerDiv>
           <Para>
@@ -324,7 +373,7 @@ const Product = () => {
               justifyContent: 'space-between',
               borderRadius: '4px',
               fontSize: '.9em',
-              width: '99%',
+              width: `${window.innerWidth <= 700 ? `${window.innerWidth - 25}px` : "99%"}`,
               alignItems: 'center',
               boxShadow: '0px 0px 5px 1px rgba(255, 0, 0, 0.5)',
               marginTop: '10px',
@@ -416,7 +465,15 @@ const Product = () => {
           >
             (5000 verified ratings)
           </span>
-          <CartButton />
+          <CartButton 
+            style={{
+              width: `${window.innerWidth <= 700 ? `${window.innerWidth - 25}px` : "99%"}`,
+              position: `${window.innerWidth <= 700 ? pos.pos : "static"}`,
+              top: `${pos.top}`,
+              left: `${pos.left}`,
+              zIndex: "10"
+            }}
+          />
           <div>
             <h2
               style={{

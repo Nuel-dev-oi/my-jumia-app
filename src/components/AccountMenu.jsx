@@ -5,7 +5,8 @@ import { FaRegHeart } from 'react-icons/fa';
 import { BsPerson } from 'react-icons/bs';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { removeAll } from '../cartSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 const Account = styled.div`
   background-color: #fff;
   position: absolute;
@@ -19,6 +20,14 @@ const Account = styled.div`
   padding: 1px;
   right: 170px;
   z-index: 10000000000000000000;
+
+  @media(max-width: 700px) {
+    position: fixed;
+    left: 0px;
+    top: 130px;
+    width: 75%;
+    height: 100vh;
+  }
 `;
 
 const Button = styled.button`
@@ -48,7 +57,7 @@ const Item = styled.div`
 `;
 
 const Span = styled.span`
-  width: 90%;
+  width: ${() => window.innerWidth <= 700 ? "50%" : "90%"};
   height: 70%;
   color: #fff;
   cursor: pointer;
@@ -106,6 +115,28 @@ const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
   const location = useLocation();
   const [scroll, setScroll] = useState('165');
   const headerRef = useRef();
+  const users = useSelector((state) => state.users);
+  const [name, setName] = useState(null);
+
+  useEffect(() => {
+    if (window.innerWidth <= 700) {
+      viewAcc === "flex" ? document.body.style.overflow = "hidden" 
+      : document.body.style.overflow = "scroll";
+    }
+    return;
+  }, [viewAcc]);
+
+  useEffect(() => {
+      function setUserName() {
+        if (loggedIn) {
+          setName(`Welcome, ${localStorage.getItem('username')}`);
+        } else {
+          setName(null);
+        }
+      }
+  
+      setUserName();
+    }, [users, loggedIn]);
 
   useEffect(() => {
     const target = (headerRef.current = document.querySelector('.header'));
@@ -147,13 +178,13 @@ const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
     <Account
       style={{
         display: `${viewAcc}`,
-        top: `${scroll}px`,
+        top: `${window.innerWidth > 700 ? `${scroll}px` : "0px"}`,
       }}
     >
       <div
         style={{
           width: '100%',
-          height: '30%',
+          height: `${window.innerWidth <= 700 ? "12%" : "30%"}`,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -177,45 +208,63 @@ const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
           </Button>
         )}
       </div>
-      <Item
-        style={{
-          marginTop: '10px',
-        }}
-      >
-        <BsPerson
-          size={20}
+      {
+        loggedIn &&
+        <Item
           style={{
-            verticalAlign: 'middle',
-            marginRight: '5px',
+            marginTop: '10px',
+            color: "orange",
           }}
-        />
-        My Account
-      </Item>
-      <Item>
-        <MdList
-          size={20}
+        >
+          <BsPerson
+            size={20}
+            style={{
+              verticalAlign: 'middle',
+              marginRight: '5px',
+            }}
+          />
+          {name}
+        </Item>
+      }
+      {
+        loggedIn && 
+        <Item
           style={{
-            verticalAlign: 'middle',
-            marginRight: '5px',
+            color: "orange",
           }}
-        />
-        Orders
-      </Item>
-      <Item>
-        <FaRegHeart
-          size={20}
+        >
+          <MdList
+            size={20}
+            style={{
+              verticalAlign: 'middle',
+              marginRight: '5px',
+            }}
+          />
+          Orders
+        </Item>
+      }
+      {
+        loggedIn &&
+        <Item
           style={{
-            verticalAlign: 'middle',
-            marginRight: '5px',
+            color: "orange",
           }}
-        />
-        Wishlist
-      </Item>
+        >
+          <FaRegHeart
+            size={20}
+            style={{
+              verticalAlign: 'middle',
+              marginRight: '5px',
+            }}
+          />
+          Wishlist
+        </Item>
+      }
       {JSON.parse(localStorage.getItem('loggedIn')) ? (
         <Button
           style={{
             width: '100%',
-            height: '20%',
+            height: `${window.innerWidth <= 700 ? "10%" : "25%"}`,
           }}
           onClick={() => {
             localStorage.removeItem('loggedIn');

@@ -7,6 +7,9 @@ import FormSearch from './Form';
 import Navigation from "./min_component/Navigation.jsx";
 import { Link } from 'react-router-dom';
 import AccountMenu from './AccountMenu.jsx';
+import { HiOutlineUser } from 'react-icons/hi';
+import { MdOutlineShoppingCart } from 'react-icons/md';
+import CartScreen from './CartScreen.jsx';
 
 const Div = styled.div`
   display: flex;
@@ -20,6 +23,9 @@ const Div = styled.div`
   z-index: 400;
   a {
     text-decoration: none;
+  }
+  @media(max-width: 700px) {
+    position: relative;
   }
 `;
 
@@ -88,7 +94,11 @@ function AltThirdHeader({ logoName }) {
   });
 
   return (
-    <>
+    <div
+      style={{
+        position: "relative",
+      }}
+    >
       <Div
         style={{
           position: position?.position,
@@ -127,23 +137,38 @@ function AltThirdHeader({ logoName }) {
 
         <Span>
           <User>
-            <FaUser
+            <HiOutlineUser
               style={{
                 marginRight: '30px',
                 cursor: 'pointer',
+                color: "orange"
               }}
+              size={28}
               onClick={handleClick}
             />
           </User>
-
-          <User>
-            <FaShoppingCart
+          <Link to="/cart"
+            style={{
+              color: "orange"
+            }}
+          >
+            <User
               style={{
-                marginRight: '30px',
-                cursor: 'pointer',
+                position: "relative",
+                fontSize: ".6em",
+                fontWeight: "400",
               }}
-            />
-          </User>
+            >
+              <CartScreen />
+              <MdOutlineShoppingCart
+                style={{
+                  marginRight: '30px',
+                  cursor: 'pointer',
+                }}
+                size={28}
+              />
+            </User>
+          </Link>
         </Span>
         <FormSearch
           style={{
@@ -169,7 +194,7 @@ function AltThirdHeader({ logoName }) {
          loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
       />
-    </>
+    </div>
   );
 }
 

@@ -122,7 +122,7 @@ const ThirdHeader = ({ logoName }) => {
         </HeadingOne>
         <FormSearch tag={true} />
         {[name, 'Help', 'Cart'].map((item, i) => {
-          if (!loggedIn && i == 2) {
+          if (!loggedIn && i === 2) {
             return;
           }
           return (
