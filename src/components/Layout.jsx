@@ -90,7 +90,9 @@ const Layout = ({ children, logoName }) => {
   const [render, setRender] = useState();
 
   useEffect(() => {
-    window.innerWidth <= 700 ? document.body.style.overflow = "hidden scroll" : document.body.style.overflowX = "scroll scroll";
+    window.innerWidth <= 700
+      ? (document.body.style.overflow = 'hidden scroll')
+      : (document.body.style.overflowX = 'scroll scroll');
   }, []);
 
   const displayLayout =
@@ -106,7 +108,9 @@ const Layout = ({ children, logoName }) => {
       }
 
       setWidth(w);
-      window.innerWidth <= 700 ? document.body.style.overflow = "hidden scroll" : document.body.style.overflowX = "scroll scroll";
+      window.innerWidth <= 700
+        ? (document.body.style.overflow = 'hidden scroll')
+        : (document.body.style.overflowX = 'scroll scroll');
     };
 
     // Run immediately
@@ -173,22 +177,17 @@ const Layout = ({ children, logoName }) => {
 
   return isSmall ? (
     <>
-    {
-      !signIn ?
-      <Header logoName={'Jumia'} /> : <SignIn appName="Jumia"/>
-    }
-    {displayLayout ? (
-      <Div>
-        <MainAds />
-        <CallOrder />
-        <Main>{children}</Main>
-      </Div>
-      ) : render
-    }
-    {
-      !signIn ?
-      <Footer logoName="Jumia" /> : null
-    }
+      {!signIn ? <Header logoName={'Jumia'} /> : <SignIn appName="Jumia" />}
+      {displayLayout ? (
+        <Div>
+          <MainAds />
+          <CallOrder />
+          <Main>{children}</Main>
+        </Div>
+      ) : (
+        render
+      )}
+      {!signIn ? <Footer logoName="Jumia" /> : null}
     </>
   ) : (
     <LayoutGrid>

@@ -15,13 +15,13 @@ const Div = styled.div`
   justify-content: space-around;
   padding: 10px;
 
-   @media(max-width: 700px) {
-     flex-direction: row;
-     background-color: orange;
-     gap: 10px;
-     background-color: orangered;
-     color: #fff;
-   }
+  @media (max-width: 700px) {
+    flex-direction: row;
+    background-color: orange;
+    gap: 10px;
+    background-color: orangered;
+    color: #fff;
+  }
 `;
 
 const Span = styled.span`
@@ -36,9 +36,8 @@ const InnerSpan = styled.span`
   align-items: center;
   flex-wrap: nowrap;
 
-   @media(max-width: 700px) {
-   font-size: .85em;
-
+  @media (max-width: 700px) {
+    font-size: 0.85em;
   }
 `;
 
@@ -52,9 +51,8 @@ const IconSpan = styled.span`
   justify-content: center;
   align-items: center;
 
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     border: 1px solid orange;
-
   }
 `;
 

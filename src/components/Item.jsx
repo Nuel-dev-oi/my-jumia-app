@@ -12,9 +12,9 @@ const FlexDiv = styled.div`
   flex-direction: row;
   padding-inline: 5px;
   margin-bottom: 15px;
-  @media(max-width: 700px) {
-   overflow: hidden; 
-   overflow-x: scroll;
+  @media (max-width: 700px) {
+    overflow: hidden;
+    overflow-x: scroll;
   }
 `;
 
@@ -33,12 +33,10 @@ const FlexItem = styled.div`
   align-content: center;
   position: relative;
   transition: transform 0.5s linear;
-   
-  @media(max-width: 700px) {
+
+  @media (max-width: 700px) {
     flex: 1 0 180px;
     margin-bottom: 15px;
-
-
   }
 
   &:hover {

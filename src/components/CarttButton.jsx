@@ -45,6 +45,9 @@ const Select = styled.div`
   align-items: center;
   font-size: 0.9em;
   font-weight: 200;
+  background-color: ${() =>
+    window.innerWidth <= 700 ? '#fff' : 'transparent'};
+  height: 100%;
 `;
 
 const Button = styled.button`
@@ -68,7 +71,7 @@ const Span = styled.span`
   font-size: 1em;
 `;
 
-const CartButton = ({style}) => {
+const CartButton = ({ style }) => {
   const cartRef = useRef();
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -173,7 +176,8 @@ const CartButton = ({style}) => {
 
   return (
     <>
-      <CartDiv ref={cartRef}
+      <CartDiv
+        ref={cartRef}
         style={{
           ...style,
         }}

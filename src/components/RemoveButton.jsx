@@ -52,6 +52,13 @@ const Div = styled.div`
   font-size: 0.9em;
   opacity: 1;
   border-radius: 5px;
+
+  @media (max-width: 700px) {
+    left: 0%;
+    width: 95vw;
+    margin-left: 10px;
+    top: 40%;
+  }
 `;
 
 const H2 = styled.h2`

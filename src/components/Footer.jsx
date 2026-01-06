@@ -31,7 +31,7 @@ const FirstDiv = styled.div`
   display: flex;
   justify-content: space-around;
 
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     flex-direction: column;
     padding: 10px;
   }
@@ -47,7 +47,7 @@ const SecondDiv = styled.div`
   background-color: #615468ff;
   justify-content: space-around;
 
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     flex-direction: column;
     padding: 10px;
   }
@@ -160,13 +160,19 @@ const Footer = ({ style, logoName }) => {
               }}
             >
               <input type="checkbox" />
-              {
-                window.innerWidth > 700 ?
-                <>I agree to Jumia's Privacy and Cookie Policy. You can unsubcribe 
-                from newsletters at <br /> any time.</> : 
-                <>I agree to Jumia's Privacy and Cookie Policy. You can unsubcribe<br />
-                from newsletters at any time.</>
-              }
+              {window.innerWidth > 700 ? (
+                <>
+                  I agree to Jumia's Privacy and Cookie Policy. You can
+                  unsubcribe from newsletters at <br /> any time.
+                </>
+              ) : (
+                <>
+                  I agree to Jumia's Privacy and Cookie Policy. You can
+                  unsubcribe
+                  <br />
+                  from newsletters at any time.
+                </>
+              )}
               <div>I accept the Legal Terms</div>
             </label>
           </Form>
@@ -368,12 +374,12 @@ const Footer = ({ style, logoName }) => {
       </SecondDiv>
       <Div
         style={{
-          flexDirection: `${window.innerWidth <= 700 ?  "column" : "row"}`,
+          flexDirection: `${window.innerWidth <= 700 ? 'column' : 'row'}`,
           display: 'flex',
           width: '100%',
           justifyContent: 'space-around',
           backgroundColor: '#615468ff',
-          padding: `${window.innerWidth <= 700 ? "30px" : "0px"}`
+          padding: `${window.innerWidth <= 700 ? '30px' : '0px'}`,
         }}
       >
         <div>
@@ -382,10 +388,10 @@ const Footer = ({ style, logoName }) => {
             style={{
               flexDirection: 'row',
               display: 'flex',
-              width: '200%',
-              justifyContent: `${window.innerWidth <= 700 ?  "flex-start" : "space-around"}`,
+              width: '100%',
+              justifyContent: `${window.innerWidth <= 700 ? 'flex-start' : 'space-around'}`,
               backgroundColor: '#615468ff',
-              gap: `${window.innerWidth <= 700 ? "10px" : "0px"}`
+              gap: `${window.innerWidth <= 700 ? '10px' : '20px'}`,
             }}
           >
             <FaFacebook size={30} />
@@ -401,10 +407,10 @@ const Footer = ({ style, logoName }) => {
             style={{
               flexDirection: 'row',
               display: 'flex',
-              width: '200%',
-              justifyContent: `${window.innerWidth <= 700 ?  "flex-start" : "space-around"}`,
+              width: '100%',
+              justifyContent: `${window.innerWidth <= 700 ? 'flex-start' : 'space-around'}`,
               backgroundColor: '#615468ff',
-              gap: `${window.innerWidth <= 700 ? "10px" : "0px"}`
+              gap: `${window.innerWidth <= 700 ? '10px' : '20px'}`,
             }}
           >
             <FaCcVisa size={30} />

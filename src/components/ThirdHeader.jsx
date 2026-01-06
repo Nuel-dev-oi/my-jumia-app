@@ -69,6 +69,7 @@ const ThirdHeader = ({ logoName }) => {
     $(() => {
       $(window).on('scroll', () => {
         let firstHeader = $('.firstHeader');
+        if (!firstHeader) return;
         let vectY = firstHeader.get(0).getBoundingClientRect().y;
         if (window.innerWidth >= 701) {
           //console.log(vectY);

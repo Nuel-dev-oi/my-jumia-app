@@ -16,6 +16,12 @@ const Div = styled.div`
   padding-block: 15px;
   padding: 0px;
   background-color: #eee;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    height: max-content;
+    margin-top: 15px;
+  }
 `;
 
 const Summary = styled.div`
@@ -29,6 +35,12 @@ const Summary = styled.div`
   margin-right: 10px;
   margin-top: 5px;
   font-weight: 400;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    margin-block: 15px;
+    padding: 10px;
+  }
 `;
 
 const Subtotal = styled.div`
@@ -90,6 +102,11 @@ const InnerDiv = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   position: relative;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    margin-top: 0px;
+  }
 `;
 
 const Para = styled.div`
@@ -108,6 +125,7 @@ const Para = styled.div`
   z-index: 1;
 `;
 function convertStrToNum(str) {
+  if (!str) return '';
   return Number(str.replace(/,/g, ''));
 }
 
@@ -168,7 +186,7 @@ const CartItem = () => {
       }
       isScrolling = false;
     };
-    window.addEventListener('scroll', handleScroll);
+    window.innerWidth > 700 && window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);

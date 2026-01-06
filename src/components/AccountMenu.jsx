@@ -21,7 +21,7 @@ const Account = styled.div`
   right: 170px;
   z-index: 10000000000000000000;
 
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     position: fixed;
     left: 0px;
     top: 130px;
@@ -57,7 +57,7 @@ const Item = styled.div`
 `;
 
 const Span = styled.span`
-  width: ${() => window.innerWidth <= 700 ? "50%" : "90%"};
+  width: ${() => (window.innerWidth <= 700 ? '50%' : '90%')};
   height: 70%;
   color: #fff;
   cursor: pointer;
@@ -120,23 +120,24 @@ const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
 
   useEffect(() => {
     if (window.innerWidth <= 700) {
-      viewAcc === "flex" ? document.body.style.overflow = "hidden" 
-      : document.body.style.overflow = "scroll";
+      viewAcc === 'flex'
+        ? (document.body.style.overflow = 'hidden')
+        : (document.body.style.overflow = 'scroll');
     }
     return;
   }, [viewAcc]);
 
   useEffect(() => {
-      function setUserName() {
-        if (loggedIn) {
-          setName(`Welcome, ${localStorage.getItem('username')}`);
-        } else {
-          setName(null);
-        }
+    function setUserName() {
+      if (loggedIn) {
+        setName(`Welcome, ${localStorage.getItem('username')}`);
+      } else {
+        setName(null);
       }
-  
-      setUserName();
-    }, [users, loggedIn]);
+    }
+
+    setUserName();
+  }, [users, loggedIn]);
 
   useEffect(() => {
     const target = (headerRef.current = document.querySelector('.header'));
@@ -178,13 +179,13 @@ const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
     <Account
       style={{
         display: `${viewAcc}`,
-        top: `${window.innerWidth > 700 ? `${scroll}px` : "0px"}`,
+        top: `${window.innerWidth > 700 ? `${scroll}px` : '0px'}`,
       }}
     >
       <div
         style={{
           width: '100%',
-          height: `${window.innerWidth <= 700 ? "12%" : "30%"}`,
+          height: `${window.innerWidth <= 700 ? '12%' : '30%'}`,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -208,12 +209,11 @@ const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
           </Button>
         )}
       </div>
-      {
-        loggedIn &&
+      {loggedIn && (
         <Item
           style={{
             marginTop: '10px',
-            color: "orange",
+            color: 'orange',
           }}
         >
           <BsPerson
@@ -225,12 +225,11 @@ const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
           />
           {name}
         </Item>
-      }
-      {
-        loggedIn && 
+      )}
+      {loggedIn && (
         <Item
           style={{
-            color: "orange",
+            color: 'orange',
           }}
         >
           <MdList
@@ -242,12 +241,11 @@ const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
           />
           Orders
         </Item>
-      }
-      {
-        loggedIn &&
+      )}
+      {loggedIn && (
         <Item
           style={{
-            color: "orange",
+            color: 'orange',
           }}
         >
           <FaRegHeart
@@ -259,12 +257,12 @@ const AccountMenu = ({ loggedIn, viewAcc, setLoggedIn }) => {
           />
           Wishlist
         </Item>
-      }
+      )}
       {JSON.parse(localStorage.getItem('loggedIn')) ? (
         <Button
           style={{
             width: '100%',
-            height: `${window.innerWidth <= 700 ? "10%" : "25%"}`,
+            height: `${window.innerWidth <= 700 ? '10%' : '25%'}`,
           }}
           onClick={() => {
             localStorage.removeItem('loggedIn');

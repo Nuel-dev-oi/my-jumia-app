@@ -43,8 +43,8 @@ const OuterDiv = styled.div`
   align-content: flex-start;
   box-shadow: inset 0px 0px 7px 1px #d0cbcbff;
   position: relative;
-  
-  @media(max-width: 700px) {
+
+  @media (max-width: 700px) {
     overflow-x: scroll;
     margin-block: 15px;
   }
@@ -167,8 +167,8 @@ const Home = () => {
         items={itemList}
         flag={false}
         style={{
-          height: `${window.innerWidth <= 700 ? "280px":  `${280 * 2}px`}`,
-          flexWrap: `${window.innerWidth <= 700 ? "nowrap" : "wrap"}`,
+          height: `${window.innerWidth <= 700 ? '280px' : `${280 * 2}px`}`,
+          flexWrap: `${window.innerWidth <= 700 ? 'nowrap' : 'wrap'}`,
           justifyContent: 'space-around',
         }}
       />

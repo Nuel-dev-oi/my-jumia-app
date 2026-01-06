@@ -33,7 +33,7 @@ const OuterDiv = styled.div`
   position: relative;
   background-color: #fff;
 
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     display: none;
   }
 `;

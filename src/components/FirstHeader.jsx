@@ -64,10 +64,16 @@ const FirstHeader = ({ logoName }) => {
     const box = boxRef.current;
     const box_p = boxPRef.current;
     const box_bib = bibRef.current;
-    
-  const STOP_AT = window.innerWidth < 700 ? (2 * window.innerWidth)/100 : -(10 * window.innerWidth)/100;
-   
-    const STOP_AT_P = window.innerWidth < 700 ? -(3 * window.innerWidth)/100 : -(15 * window.innerWidth)/100;
+
+    const STOP_AT =
+      window.innerWidth < 700
+        ? (2 * window.innerWidth) / 100
+        : -(10 * window.innerWidth) / 100;
+
+    const STOP_AT_P =
+      window.innerWidth < 700
+        ? -(3 * window.innerWidth) / 100
+        : -(15 * window.innerWidth) / 100;
 
     const SCALE_AMOUNT = 0.1; // how much it grows/shrinks
     const SCALE_SPEED = 0.05; // how fast it pulses

@@ -17,6 +17,11 @@ const Div = styled.div`
   grid-column-end: span 2;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 700px) {
+    height: max-content;
+    padding: 10px;
+  }
 `;
 const InnerDiv = styled.div`
   display: flex;

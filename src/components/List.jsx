@@ -16,15 +16,14 @@ const Li = styled.li`
     color: #000;
     text-decoration: none;
 
-    @media(max-width: 700px) {
+    @media (max-width: 700px) {
       color: #000;
-
     }
 
     &:hover {
       color: #ff6600;
-      @media(max-width: 700px) {
-        color: red
+      @media (max-width: 700px) {
+        color: red;
       }
     }
   }

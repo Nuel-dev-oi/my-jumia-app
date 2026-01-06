@@ -17,7 +17,6 @@ const Nav = styled.nav`
 `;
 
 const Navigation = ({ style }) => {
-  
   return (
     <Nav
       style={{
@@ -48,7 +47,7 @@ const Navigation = ({ style }) => {
           );
         })}
       </ul>
-      </Nav>
+    </Nav>
   );
 };
 

@@ -21,11 +21,10 @@ const Div = styled.div`
   overflow: hidden;
   font-weight: 600;
 
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     right: 25px;
     position: absolute;
-    top: -15px
-
+    top: -15px;
   }
 `;
 

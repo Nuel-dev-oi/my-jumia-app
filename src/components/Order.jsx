@@ -29,6 +29,13 @@ const Div = styled.div`
   opacity: 1;
   border-radius: 5px;
   z-index: 7000000000000000000;
+
+  @media (max-width: 700px) {
+    left: 0%;
+    width: 95vw;
+    margin-left: 10px;
+    top: 40%;
+  }
 `;
 
 const H2 = styled.h2``;

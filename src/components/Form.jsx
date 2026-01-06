@@ -12,7 +12,7 @@ const Input = styled.input`
   border-radius: 2px;
   flex: 1 0 auto;
 
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     font-size: 1em;
   }
 `;
@@ -25,7 +25,7 @@ const Form = styled.form`
   /*width: 60%;*/
   flex-wrap: nowrap;
 
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     width: 60%;
     flex-wrap: wrap;
     justify-content: center;

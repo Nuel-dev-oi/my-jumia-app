@@ -37,9 +37,8 @@ const Div = styled.div`
   transition: opacity 0.6s ease-in-out;
   opacity: 1;
 
-  @media(max-width: 700px) {
-    width: 100%
-
+  @media (max-width: 700px) {
+    width: 100%;
   }
 `;
 
@@ -53,7 +52,7 @@ const PicDiv = styled.div`
   left: 35%;
   width: 445px;
 
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     top: 0px;
     left: 0px;
     width: 100%;
@@ -71,10 +70,9 @@ const InnerSpan = styled.span`
   line-height: 0.8;
   margin-top: 5%;
 
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     display: none;
   }
-
 `;
 
 const Img = styled.img`
@@ -112,7 +110,7 @@ const FixedDiv = styled.div`
   }
 `;
 const Span = styled.span`
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     display: none;
   }
 `;
@@ -219,45 +217,44 @@ const MainAds = () => {
       >
         02-28 DEC
       </Span>
-      {
-        window.innerWidth <= 700 ? null :
-      <Span
-        style={{
-          display: 'inline-block',
-          width: '30%',
-          marginLeft: '20px',
-          height: 'max-content',
-          borderRadius: '9px',
-          backgroundColor: '#ff0000',
-          color: '#fff',
-          fontSize: '.8rem',
-        }}
-      >
+      {window.innerWidth <= 700 ? null : (
         <Span
           style={{
-            display: 'flex',
+            display: 'inline-block',
+            width: '30%',
+            marginLeft: '20px',
+            height: 'max-content',
             borderRadius: '9px',
-            padding: '5px',
-            border: '1px dashed #fff',
-            width: '97%',
-            margin: '2px',
-            justifyContent: 'space-around',
-            alignItems: 'center',
+            backgroundColor: '#ff0000',
+            color: '#fff',
+            fontSize: '.8rem',
           }}
         >
-          {window.innerWidth <= 700 ? null :'up to '.toUpperCase()}
           <Span
             style={{
-              fontSize: '1.8rem',
-              lineHeight: '.8',
-              marginLeft: '-20px',
+              display: 'flex',
+              borderRadius: '9px',
+              padding: '5px',
+              border: '1px dashed #fff',
+              width: '97%',
+              margin: '2px',
+              justifyContent: 'space-around',
+              alignItems: 'center',
             }}
           >
-            65% off
+            {window.innerWidth <= 700 ? null : 'up to '.toUpperCase()}
+            <Span
+              style={{
+                fontSize: '1.8rem',
+                lineHeight: '.8',
+                marginLeft: '-20px',
+              }}
+            >
+              65% off
+            </Span>
           </Span>
         </Span>
-      </Span> 
-      }
+      )}
       <Span
         style={{
           margin: '20px',

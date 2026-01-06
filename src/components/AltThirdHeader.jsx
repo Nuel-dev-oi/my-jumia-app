@@ -4,7 +4,7 @@ import { FaBars } from 'react-icons/fa';
 import logo from '../assets/jumia.svg';
 import { FaUser, FaShoppingCart } from 'react-icons/fa';
 import FormSearch from './Form';
-import Navigation from "./min_component/Navigation.jsx";
+import Navigation from './min_component/Navigation.jsx';
 import { Link } from 'react-router-dom';
 import AccountMenu from './AccountMenu.jsx';
 import { HiOutlineUser } from 'react-icons/hi';
@@ -24,7 +24,7 @@ const Div = styled.div`
   a {
     text-decoration: none;
   }
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     position: relative;
   }
 `;
@@ -59,14 +59,14 @@ function AltThirdHeader({ logoName }) {
   });
 
   const [loggedIn, setLoggedIn] = useState(
-      JSON.parse(localStorage.getItem('loggedIn'))
-    );
+    JSON.parse(localStorage.getItem('loggedIn'))
+  );
 
   const onSetView = (value) => {
     setView(value);
-  }
+  };
 
-  const [size, setSize] = useState(window.innerWidth);
+  const [_, setSize] = useState(window.innerWidth);
 
   const handleClick = () => {
     viewAcc == 'none' ? setViewAcc('flex') : setViewAcc('none');
@@ -96,7 +96,9 @@ function AltThirdHeader({ logoName }) {
   return (
     <div
       style={{
-        position: "relative",
+        position: 'relative',
+        width: "100%",
+
       }}
     >
       <Div
@@ -104,19 +106,20 @@ function AltThirdHeader({ logoName }) {
           position: position?.position,
           top: position?.top,
           display: 'flex',
-          width: `${size}px`,
+          width: "100%",
         }}
       >
         <FaBars
           style={{
             margin: '15px',
-            cursor: "pointer",
+            cursor: 'pointer',
           }}
           onClick={() => {
             view === true ? setView(false) : setView(true);
-            
-           view === true ? document.body.style.overflow = "scroll" 
-              : document.body.style.overflow = "hidden";
+
+            view === true
+              ? (document.body.style.overflow = 'scroll')
+              : (document.body.style.overflow = 'hidden');
           }}
         />
         <Span
@@ -141,22 +144,23 @@ function AltThirdHeader({ logoName }) {
               style={{
                 marginRight: '30px',
                 cursor: 'pointer',
-                color: "orange"
+                color: 'orange',
               }}
               size={28}
               onClick={handleClick}
             />
           </User>
-          <Link to="/cart"
+          <Link
+            to="/cart"
             style={{
-              color: "orange"
+              color: 'orange',
             }}
           >
             <User
               style={{
-                position: "relative",
-                fontSize: ".6em",
-                fontWeight: "400",
+                position: 'relative',
+                fontSize: '.6em',
+                fontWeight: '400',
               }}
             >
               <CartScreen />
@@ -185,13 +189,10 @@ function AltThirdHeader({ logoName }) {
           }}
         />
       </Div>
-      {
-        view &&
-      <Navigation onSetView={onSetView} />
-      }
+      {view && <Navigation onSetView={onSetView} />}
       <AccountMenu
         viewAcc={viewAcc}
-         loggedIn={loggedIn}
+        loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
       />
     </div>

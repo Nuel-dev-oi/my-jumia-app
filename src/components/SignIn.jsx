@@ -46,6 +46,10 @@ const Input = styled.input`
   margin-bottom: 25px;
   flex: 0 0 50px;
 
+  @media (max-width: 700px) {
+    width: 70%;
+  }
+
   &:focus {
     outline: none;
     border: solid 2px orange;
@@ -66,6 +70,10 @@ const Submit = styled.input`
   letter-spacing: 1px;
   cursor: pointer;
   flex: 0 0 50px;
+
+  @media (max-width: 700px) {
+    width: 70%;
+  }
 `;
 
 const InputDiv = styled.div`
@@ -80,6 +88,10 @@ const InputDiv = styled.div`
     color 0.5s linear,
     top 0.5s linear;
   opacity: 1;
+
+  @media (max-width: 700px) {
+    left: 18%;
+  }
 `;
 
 const PasswordDiv = styled.div`
@@ -94,6 +106,10 @@ const PasswordDiv = styled.div`
     color 0.5s linear,
     top 0.5s linear;
   opacity: 1;
+
+  @media (max-width: 700px) {
+    left: 18%;
+  }
 `;
 
 const SignIn = ({ appName }) => {
@@ -103,18 +119,18 @@ const SignIn = ({ appName }) => {
   const [position, setPosition] = useState({
     top: '223px',
     color: '#000',
-    fontSize: '.5em',
+    fontSize: `${window.innerWidth <= 700 ? '.4em' : '.5em'}`,
   });
   const [absolute, setAbsolute] = useState({
     top: '300px',
     color: '#000',
-    fontSize: '.5em',
+    fontSize: `${window.innerWidth <= 700 ? '.4em' : '.5em'}`,
   });
 
   const [pos, setPos] = useState({
     top: '375px',
     color: '#000',
-    fontSize: '.5em',
+    fontSize: `${window.innerWidth <= 700 ? '.4em' : '.5em'}`,
   });
 
   const [loggedIn, _] = useState(
@@ -143,31 +159,42 @@ const SignIn = ({ appName }) => {
 
   const handleBlur = () => {
     if (ref.current.matches(':not(:focus)') && !ref.current.value) {
-      setPosition({ top: '223px', color: '#000', fontSize: '.5em' });
+      setPosition({
+        top: '223px',
+        color: '#000',
+        fontSize: `${window.innerWidth <= 700 ? '.4em' : '.5em'}`,
+      });
     }
     if (secondRef.current.matches(':not(:focus)') && !secondRef.current.value) {
-      setAbsolute({ top: '300px', color: '#000', fontSize: '.5em' });
+      setAbsolute({
+        top: '300px',
+        color: '#000',
+        fontSize: `${window.innerWidth <= 700 ? '.4em' : '.5em'}`,
+      });
     }
     if (thirdRef.current.matches(':not(:focus)') && !secondRef.current.value) {
-      setPos({ top: '375px', color: '#000', fontSize: '.5em' });
+      setPos({
+        top: '375px',
+        color: '#000',
+        fontSize: `${window.innerWidth <= 700 ? '.4em' : '.5em'}`,
+      });
     }
   };
 
   const handleClick_1 = () => {
     setPosition({ top: '205px', color: 'orange', fontSize: '.4em' });
     ref.current.focus();
-  }
+  };
 
   const handleClick_2 = () => {
     setAbsolute({ top: '280px', color: 'orange', fontSize: '.4em' });
     secondRef.current.focus();
-  }
+  };
 
   const handleClick_3 = () => {
     setPos({ top: '354px', color: 'orange', fontSize: '.4em' });
     thirdRef.current.focus();
-  }
-  
+  };
 
   const handleSubmit = () => {
     let done = null;

@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import data, { iconList } from '../../scripts/navList.jsx';
 import List from '../List.jsx';
-import { FaTimes } from "react-icons/fa";
+import { FaTimes } from 'react-icons/fa';
 
 const Nav = styled.nav`
   width: 95%;
@@ -17,13 +17,11 @@ const Nav = styled.nav`
 `;
 
 const Navigation = ({ style, onSetView }) => {
-  
   return (
     <Nav
       style={{
         ...style,
         borderRadius: '5px',
-      
       }}
     >
       <ul
@@ -51,16 +49,15 @@ const Navigation = ({ style, onSetView }) => {
       <FaTimes
         size={25}
         style={{
-            cursor: "pointer",
-            color: "#000",
-
+          cursor: 'pointer',
+          color: '#000',
         }}
         onClick={() => {
-            onSetView(false);
-            document.body.style.overflow = "scroll";
+          onSetView(false);
+          document.body.style.overflow = 'scroll';
         }}
       />
-      </Nav>
+    </Nav>
   );
 };
 

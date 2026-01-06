@@ -15,6 +15,12 @@ const Div = styled.div`
   height: max-content;
   display: flex;
   flex: 1 0 auto;
+
+  @media (max-width: 700px) {
+    font-size: 0.75em;
+    height: 250px;
+    overflow: hidden;
+  }
 `;
 const Img = styled.img`
   width: 100%;
@@ -33,6 +39,11 @@ const Span = styled.span`
   color: orange;
   margin: 5px;
 
+  @media (max-width: 700px) {
+    margin: 0px;
+    font-size: 1.1em;
+  }
+
   &: hover {
     background-color: #ffcff2ff;
     border-radius: 5px;
@@ -48,6 +59,11 @@ const Select = styled.div`
   font-size: 0.9em;
   font-weight: 200;
   height: 130px;
+
+  @media (max-width: 700px) {
+    margin-right: 20px;
+    transform: translateX(-4px);
+  }
 `;
 
 const Button = styled.button`
@@ -123,8 +139,8 @@ const CartItemProduct = ({ product }) => {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            height: '100%',
-            width: '15%',
+            height: `${window.innerWidth <= 700 ? '250px' : '100%'}`,
+            width: `${window.innerWidth <= 700 ? '30%' : '15%'}`,
             backgroundColor: '#fff',
             flex: '1 0 auto',
             padding: '5px',
@@ -216,6 +232,7 @@ const CartItemProduct = ({ product }) => {
               marginRight: '5px',
               fontSize: '1.5em',
               fontWeight: '400',
+              whiteSpace: 'nowrap',
             }}
           >
             {' '}
@@ -229,6 +246,7 @@ const CartItemProduct = ({ product }) => {
                 fontSize: '.9em',
                 fontWeight: '300',
                 textDecoration: 'line-through',
+                display: 'inline-block',
               }}
             >
               {'\u20a6'} {currentItem?.formerPrice}

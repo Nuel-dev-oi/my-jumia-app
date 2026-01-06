@@ -15,7 +15,6 @@ const HeaderContainer = styled.header`
 function Header({ logoName, style }) {
   const [isSmall, setIsSmall] = useState(false);
 
-
   useLayoutEffect(() => {
     const handleResize = () => {
       const w = window.innerWidth;
