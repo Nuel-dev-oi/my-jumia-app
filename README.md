@@ -12,8 +12,8 @@ It is designed to showcase **real-world frontend engineering skills**, including
 - Fully responsive layout (mobile & desktop)
 - Centralized layout management
 - Dynamic category and product page rendering
-- Custom routing logic using `react-router`
-- Conditional UI rendering for authentication pages
+- Client-side routing with **React Router**
+- Conditional layout rendering (e.g. auth pages without header/footer)
 - Reusable and modular component architecture
 - Styled with **styled-components**, CSS Grid, and Flexbox
 
@@ -23,15 +23,33 @@ It is designed to showcase **real-world frontend engineering skills**, including
 
 - **React**
 - **React Router DOM**
+- **Vite**
 - **Styled-Components**
 - **JavaScript (ES6+)**
 - **CSS Grid & Flexbox**
 
 ---
 
-## 📂 Project Structure (Overview)
+## ⚙️ App Setup & Running Locally
 
-src/
-├── components/ # Reusable UI components and layout logic
-├── pages/ # Category and feature pages
-├── assets/ # Images, icons, and static files
+This project is built using **Vite** for fast development and optimized builds.
+
+### Prerequisites
+
+- **Node.js** (v16 or higher recommended)
+- **npm**
+
+### Installation
+
+Install dependencies:
+```bash
+npm install
+```
+
+### Running the App
+```bash
+npm run dev
+```
+The app is available at http://localhost:5173
+
+
