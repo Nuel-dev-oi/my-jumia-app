@@ -41,7 +41,7 @@ const Div = styled.div`
 
 const LayoutGrid = styled.div`
   display: grid;
-  grid-template-columns: /*5vw 20vw 69vw 5vw*/ 64px 256px 883.2px 64px;
+  grid-template-columns: 5vw 20vw 69vw 5vw /*64px 256px 883.2px 64px*/;
   grid-template-rows: 179.4px max-content 15px max-content;
   background-image: url(${layoutImg});
   background-repeat: no-repeat;
@@ -203,7 +203,7 @@ const Layout = ({ children, logoName }) => {
           }}
         />
       ) : (
-        <SignIn />
+        <SignIn appName="Jumia" />
       )}
       {displayLayout ? (
         <Div
@@ -290,7 +290,7 @@ const Layout = ({ children, logoName }) => {
       ) : (
         render
       )}
-      {!signIn ? (
+      {!signIn && (
         <Footer
           style={{
             gridRowStart: '4',
@@ -300,9 +300,8 @@ const Layout = ({ children, logoName }) => {
           }}
           logoName="Jumia"
         />
-      ) : (
-        <SignIn appName="Jumia" />
-      )}
+      ) 
+      }
     </LayoutGrid>
   );
 };

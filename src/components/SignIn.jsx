@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 const Div = styled.div`
   width: 101%;
-  height: max-content;
+  height: 110vh;
   grid-column: 1/-1;
   grid-row: 1 / span 3;
   text-align: center;
