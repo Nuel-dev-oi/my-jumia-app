@@ -1,16 +1,40 @@
-# React + Vite
+# 🛍️ E-Commerce Frontend Layout (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive and scalable **frontend e-commerce application layout** built with **React** and **React Router**.  
+This project demonstrates strong layout architecture, responsive design principles, and dynamic page rendering commonly used in modern e-commerce platforms.
 
-Currently, two official plugins are available:
+It is designed to showcase **real-world frontend engineering skills**, including routing logic, component composition, and adaptive UI behavior.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Fully responsive layout (mobile & desktop)
+- Centralized layout management
+- Dynamic category and product page rendering
+- Custom routing logic using `react-router`
+- Conditional UI rendering for authentication pages
+- Reusable and modular component architecture
+- Styled with **styled-components**, CSS Grid, and Flexbox
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Tech Stack
+
+- **React**
+- **React Router DOM**
+- **Styled-Components**
+- **JavaScript (ES6+)**
+- **CSS Grid & Flexbox**
+
+---
+
+## 📂 Project Structure (Overview)
+
+src/
+├── components/     # Reusable UI components and layout logic
+├── pages/          # Category and feature pages
+├── assets/         # Images, icons, and static files
+
+
+
