@@ -22,7 +22,6 @@ const Form = styled.form`
   flex: 0 1 750px;
   justify-content: space-between;
   align-items: center;
-  /*width: 60%;*/
   flex-wrap: nowrap;
 
   @media (max-width: 700px) {
