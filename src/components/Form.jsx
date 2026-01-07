@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 import data from '../scripts/navList.jsx';

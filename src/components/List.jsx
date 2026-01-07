@@ -11,23 +11,25 @@ const Li = styled.li`
   font-family: 'Gruppo', san-serif;
   white-space: nowrap;
   color: #000;
+`;
 
-  a {
-    color: #000;
-    text-decoration: none;
+const StyledLink = styled(Link)`
+  color: #000;              
+  text-decoration: none;
 
-    @media (max-width: 700px) {
-      color: #000;
-    }
+  &:visited {
+    color: #000;            
+  }
 
-    &:hover {
-      color: #ff6600;
-      @media (max-width: 700px) {
-        color: red;
-      }
-    }
+  &:active {
+    color: #000;        
+  }
+
+  &:hover {
+    color: #ff6600;
   }
 `;
+
 
 const List = ({ item, children }) => {
   let link = item;
@@ -49,9 +51,9 @@ const List = ({ item, children }) => {
 
   return (
     <Li>
-      <Link to={`/${link.toLowerCase()}`}>
+      <StyledLink to={`/${link.toLowerCase()}`}>
         {children} {item}
-      </Link>
+      </StyledLink>
     </Li>
   );
 };
