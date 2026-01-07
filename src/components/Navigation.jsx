@@ -11,6 +11,7 @@ const Nav = styled.nav`
   display: flex;
   align-items: flex-start;
   color: #000;
+
   @media (max-width: 700px) {
     display: none;
   }

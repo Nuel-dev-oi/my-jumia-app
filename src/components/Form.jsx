@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
+import data from '../scripts/navList.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const Input = styled.input`
   width: 100%;
@@ -33,8 +35,32 @@ const Form = styled.form`
 `;
 
 const FormSearch = ({ tag, style, search }) => {
+  const [query, setQuery] = React.useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const flag = data.some((datum) => {
+      return datum.toLowerCase().includes(query.toLowerCase().substring(0, 3));
+    });
+    console.log(flag);
+    if (flag) {
+      if (query.includes('and')) {
+        navigate(
+          `/${query
+            .toLowerCase()
+            .replace(/\band\b/g, '_')
+            .replace(/\s/g, '')}`
+        );
+      } else {
+        navigate(`/${query.toLowerCase().replace(/\s/g, '_')}`);
+      }
+    }
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <div
         style={{
           width: '80%',
@@ -67,7 +93,10 @@ const FormSearch = ({ tag, style, search }) => {
             type="search"
             id="search"
             name="search"
+            list="search-options"
             placeholder="Search products, brands and categories"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
         </label>{' '}
       </div>
@@ -90,6 +119,20 @@ const FormSearch = ({ tag, style, search }) => {
           }}
         />
       )}
+      <datalist id="search-options">
+        <option value="Appliances" />
+        <option value="Phones and Tablets" />
+        <option value="Health and Beauty" />
+        <option value="Home and Office" />
+        <option value="Electronics" />
+        <option value="Computing" />
+        <option value="Gaming" />
+        <option value="Fashion" />
+        <option value="Baby Products" />
+        <option value="Supermarket" />
+        <option value="Musical Instruments" />
+        <option value="Other Categories" />
+      </datalist>
     </Form>
   );
 };

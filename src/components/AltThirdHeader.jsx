@@ -97,8 +97,7 @@ function AltThirdHeader({ logoName }) {
     <div
       style={{
         position: 'relative',
-        width: "100%",
-
+        width: '100%',
       }}
     >
       <Div
@@ -106,7 +105,7 @@ function AltThirdHeader({ logoName }) {
           position: position?.position,
           top: position?.top,
           display: 'flex',
-          width: "100%",
+          width: '100%',
         }}
       >
         <FaBars

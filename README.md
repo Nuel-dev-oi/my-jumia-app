@@ -32,9 +32,6 @@ It is designed to showcase **real-world frontend engineering skills**, including
 ## 📂 Project Structure (Overview)
 
 src/
-├── components/     # Reusable UI components and layout logic
-├── pages/          # Category and feature pages
-├── assets/         # Images, icons, and static files
-
-
-
+├── components/ # Reusable UI components and layout logic
+├── pages/ # Category and feature pages
+├── assets/ # Images, icons, and static files
