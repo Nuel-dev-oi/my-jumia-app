@@ -239,7 +239,7 @@ const Product = () => {
             pos: 'fixed',
             top: '90px',
             right: '67px',
-            width: '275px',
+            width: '22%',
           });
         } else {
           setPosition({ pos: 'static', width: '' });
@@ -248,9 +248,9 @@ const Product = () => {
         if (rect.y <= -280) {
           setPosition({
             pos: 'absolute',
-            top: `385px`,
+            top: `395px`,
             right: '0px',
-            width: '275px',
+            width: "100%",
           });
         }
       }
