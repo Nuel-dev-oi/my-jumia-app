@@ -47,7 +47,7 @@ const LayoutGrid = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  width: 1270px;
+  width: max-content;
 `;
 const Pages = [
   () => <Appliance />,
