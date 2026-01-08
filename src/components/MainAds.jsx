@@ -50,7 +50,7 @@ const PicDiv = styled.div`
   background-image: ${adImage};
   top: 0%;
   left: 35%;
-  width: 445px;
+  width: 65%;
 
   @media (max-width: 700px) {
     top: 0px;
