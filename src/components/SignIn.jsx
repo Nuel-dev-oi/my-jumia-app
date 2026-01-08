@@ -83,7 +83,7 @@ const InputDiv = styled.div`
   font-size: 0.5em;
   position: absolute;
   top: 223px;
-  left: 480px;
+  left: 38%;
   transition:
     color 0.5s linear,
     top 0.5s linear;
@@ -101,7 +101,7 @@ const PasswordDiv = styled.div`
   font-size: 0.5em;
   position: absolute;
   top: 300px;
-  left: 480px;
+  left: 38%;
   transition:
     color 0.5s linear,
     top 0.5s linear;
