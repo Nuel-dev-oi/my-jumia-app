@@ -14,22 +14,21 @@ const Li = styled.li`
 `;
 
 const StyledLink = styled(Link)`
-  color: #000;              
+  color: #000;
   text-decoration: none;
 
   &:visited {
-    color: #000;            
+    color: #000;
   }
 
   &:active {
-    color: #000;        
+    color: #000;
   }
 
   &:hover {
     color: #ff6600;
   }
 `;
-
 
 const List = ({ item, children }) => {
   let link = item;

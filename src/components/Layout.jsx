@@ -300,8 +300,7 @@ const Layout = ({ children, logoName }) => {
           }}
           logoName="Jumia"
         />
-      ) 
-      }
+      )}
     </LayoutGrid>
   );
 };

@@ -42,14 +42,15 @@ This project is built using **Vite** for fast development and optimized builds.
 ### Installation
 
 Install dependencies:
+
 ```bash
 npm install
 ```
 
 ### Running the App
+
 ```bash
 npm run dev
 ```
+
 The app is available at http://localhost:5173
-
-

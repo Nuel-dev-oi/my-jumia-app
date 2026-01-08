@@ -250,7 +250,7 @@ const Product = () => {
             pos: 'absolute',
             top: `395px`,
             right: '0px',
-            width: "100%",
+            width: '100%',
           });
         }
       }

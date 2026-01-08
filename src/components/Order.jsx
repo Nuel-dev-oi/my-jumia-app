@@ -40,32 +40,36 @@ const Div = styled.div`
 
 const H2 = styled.h2``;
 
-const Order = ({ onSetOrder }) => {
+const Order = ({ onSetOrder, value }) => {
   const dispatch = useDispatch();
   const ref = useRef();
   useEffect(() => {
     ref.current.style.backgroundColor = 'rgba(119, 116, 116, 0.4)';
-    document.body.style.overflow = 'hidden';
-  }, []);
+    value
+      ? (document.body.style.overflow = 'scroll')
+      : (document.body.style.overflow = 'hidden');
+  }, [value]);
 
   return (
     <OuterDiv ref={ref}>
       <Div>
         <H2>
-          <FaTimes
-            style={{
-              verticalAlign: 'middle',
-              cursor: 'pointer',
-              position: 'absolute',
-              right: '10px',
-              top: '5px',
-            }}
-            onClick={() => {
-              document.body.style.overflow = 'scroll';
-              onSetOrder(false);
-              dispatch(removeAll());
-            }}
-          />
+          {value ? null : (
+            <FaTimes
+              style={{
+                verticalAlign: 'middle',
+                cursor: 'pointer',
+                position: 'absolute',
+                right: '10px',
+                top: '5px',
+              }}
+              onClick={() => {
+                document.body.style.overflow = 'scroll';
+                onSetOrder(false);
+                dispatch(removeAll());
+              }}
+            />
+          )}
         </H2>
         <p
           style={{
@@ -73,7 +77,8 @@ const Order = ({ onSetOrder }) => {
             fontSize: '1.2em',
           }}
         >
-          <FaCheckCircle color="green" /> Order Succesfully Placed
+          <FaCheckCircle color="green" />{' '}
+          {value ? value : 'Order Succesfully Placed'}
         </p>
       </Div>
     </OuterDiv>
