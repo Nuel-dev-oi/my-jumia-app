@@ -238,7 +238,7 @@ const Product = () => {
           setPosition({
             pos: 'fixed',
             top: '90px',
-            right: '67px',
+            right: '80px',
             width: '22%',
           });
         } else {
